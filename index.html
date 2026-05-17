@@ -372,6 +372,43 @@ nav.menu-open .nav-logo{opacity:0;pointer-events:none}
   footer{flex-direction:column;gap:.8rem;text-align:center;padding:1.5rem}
   .footer-links{justify-content:center}
 }
+
+/* Dark mode toggle button */
+.theme-toggle{background:none;border:none;font-size:1rem;opacity:.55;transition:opacity .2s;padding:0 0 0 .5rem;line-height:1;color:inherit}
+.theme-toggle:hover{opacity:1}
+nav.on-hero .theme-toggle{color:#fff}
+
+/* Dark mode overrides */
+body.dark{background:#111;color:#e8e8e8}
+body.dark nav.stuck{background:rgba(12,12,12,.97)}
+body.dark nav.stuck .nav-logo{color:#e8e8e8}
+body.dark nav.stuck .nav-links button{color:#6a90b0}
+body.dark nav.stuck .nav-links button:hover,body.dark nav.stuck .nav-links button.active{color:#e8e8e8}
+body.dark nav.stuck .nav-burger span,body.dark .nav-burger span{background:#e8e8e8}
+body.dark .nav-logo{color:#e8e8e8}
+body.dark .about-intro-name{color:#e8e8e8}
+body.dark .studio-name{color:#e8e8e8}
+body.dark .studio-item{border-color:rgba(255,255,255,.08)}
+body.dark .studios-num::after,body.dark .skills-num::after{background:rgba(255,255,255,.1)}
+body.dark .tl-role{color:#e8e8e8}
+body.dark .tl-line{background:rgba(255,255,255,.1)}
+body.dark .tab-btn.tab-arch,body.dark .tab-btn.tab-art,body.dark .work-tab.wt-arch,body.dark .work-tab.wt-art{color:#e8e8e8}
+body.dark .blog-cat.on,body.dark .blog-cat:hover{color:#e8e8e8}
+body.dark .about-text strong,body.dark .tag:hover{color:#e8e8e8}
+body.dark .field input,body.dark .field textarea,body.dark .field select{color:#e8e8e8;border-bottom-color:rgba(255,255,255,.15)}
+body.dark .footer-cr{color:rgba(255,255,255,.25)}
+body.dark .mobile-menu{background:#111}
+body.dark .mobile-menu li{border-color:rgba(255,255,255,.07)}
+body.dark .mobile-menu button{color:#e8e8e8}
+body.dark #proj-lb{background:rgba(12,12,12,.98)}
+body.dark .lb-close{color:rgba(255,255,255,.4)}
+body.dark .lb-proj-title,body.dark .lb-proj-tagline{color:#e8e8e8}
+body.dark .lb-proj-semester{color:rgba(255,255,255,.45)}
+body.dark .lb-proj-desc{color:rgba(255,255,255,.6)}
+body.dark .shop-detail-title,body.dark .shop-detail-price{color:#e8e8e8}
+body.dark .shop-detail-desc{color:rgba(255,255,255,.6)}
+body.dark .shop-item-title{color:#e8e8e8}
+body.dark .shop-detail-back:hover{color:#e8e8e8}
 </style>
 </head>
 <body>
@@ -385,6 +422,7 @@ nav.menu-open .nav-logo{opacity:0;pointer-events:none}
     <li><button id="nl-shop"    onclick="goTo('shop')">Shop</button></li>
     <li style="display:none"><button id="nl-blog"    onclick="goTo('blog')">Blog</button></li>
     <li><button id="nl-contact" class="nav-cta" onclick="goTo('contact')">Contact</button></li>
+    <li><button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">◐</button></li>
   </ul>
   <button class="nav-burger" id="nav-burger" onclick="toggleMobileNav()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -708,6 +746,21 @@ nav.menu-open .nav-logo{opacity:0;pointer-events:none}
 </div>
 
 <script>
+// Dark mode
+function toggleTheme(){
+  const dark=document.body.classList.toggle('dark');
+  localStorage.setItem('theme',dark?'dark':'light');
+  document.getElementById('theme-toggle').textContent=dark?'○':'◐';
+}
+(function(){
+  if(localStorage.getItem('theme')==='dark'){
+    document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded',function(){
+      document.getElementById('theme-toggle').textContent='○';
+    });
+  }
+})();
+
 const cursor=document.getElementById('cursor');
 document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
 document.querySelectorAll('a,button,.img-cell,.proj-card,.blog-card,.featured,.zoom-nav,#zoom-img').forEach(el=>{
