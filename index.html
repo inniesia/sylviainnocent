@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sylvia Innocent — Architect & Artist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#FAF7F2;color:#1a1a1a;cursor:none;overflow-x:hidden}
+a{cursor:none;text-decoration:none}
+button{cursor:none;font-family:'Inter',sans-serif}
+#cursor{position:fixed;pointer-events:none;z-index:99999;width:16px;height:16px;background:#fff;border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .15s,height .15s}
+body.hov #cursor{width:32px;height:32px}
+ul{list-style:none}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#FAF7F2}
+::-webkit-scrollbar-thumb{background:#C8C2BC}
+
+
+nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 4rem;border-bottom:1px solid transparent;transition:all .4s}
+nav.stuck{background:rgba(250,247,242,.97);backdrop-filter:blur(18px);border-color:transparent;padding:1.1rem 4rem}
+.nav-logo{font-weight:800;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;background:none;border:none;padding:0;color:#1a1a1a}
+.nav-logo span{color:#1a5fa0}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links button{font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;font-weight:600;background:none;border:none;padding:0;color:#1a5fa0;transition:color .2s}
+.nav-links button:hover,.nav-links button.active{color:#1a1a1a}
+nav.on-hero .nav-links button{color:rgba(255,255,255,.6)}
+nav.on-hero .nav-links button:hover,nav.on-hero .nav-links button.active{color:#fff}
+nav.on-hero .nav-burger span{background:#fff}
+nav.on-hero .nav-logo{color:#fff}
+nav.on-hero .nav-logo span{color:#1a5fa0}
+nav.on-hero .nav-cta{color:#fff!important;border-color:rgba(255,255,255,.25)!important}
+nav.stuck .nav-links button{color:#1a5fa0}
+nav.stuck .nav-links button:hover,nav.stuck .nav-links button.active{color:#1a1a1a}
+nav.stuck .nav-logo{color:#1a1a1a}
+.nav-cta{padding:.5rem 1.3rem!important;border:1px solid rgba(26,95,160,.3)!important;color:#1a5fa0!important}
+.nav-cta:hover{border-color:#1a5fa0!important;background:rgba(26,95,160,.1)!important}
+nav.stuck .nav-cta{border-color:rgba(0,0,0,.15)!important;color:#1a5fa0!important}
+
+.page{display:none}
+.page.active{display:block}
+
+.btn{display:inline-block;padding:.75rem 2rem;font-family:'Inter',sans-serif;font-weight:700;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;border:1px solid;transition:all .3s}
+.btn-blue{background:#1a5fa0;color:#fff;border-color:#1a5fa0}
+.btn-blue:hover{background:transparent;color:#1a5fa0}
+.btn-ghost{background:transparent;color:#6a90b0;border-color:rgba(255,255,255,.15)}
+.btn-ghost:hover{border-color:#1a5fa0;color:#1a5fa0}
+.btn-white{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.btn-white:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 1s ease;pointer-events:none}
+.hero-bg-arch{z-index:0;opacity:1;background-color:#0d0105;background-image:url('hero-arch new 2.webp')}
+.hero-bg-art{z-index:1;opacity:0;background-color:#0d0105;background-image:url('hero-art.webp')}
+.hero-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;transition:opacity 1s ease}
+.hero-ov-arch{background:rgba(19,2,8,.5)}
+.hero-ov-art{background:rgba(19,2,8,.52)}
+.hero-inner{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;padding:7rem 2rem 9rem;width:100%}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(3.8rem,11vw,9rem);font-weight:400;line-height:.92;letter-spacing:-.01em;color:#fff;animation:up .9s .2s both;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+.hero-name-last{display:block;color:#1a5fa0;font-style:italic}
+.hero-toggle{display:flex;align-items:center;gap:1rem;margin:2.4rem 0 2rem;animation:up .8s .45s both}
+.hero-toggle-sep{width:22px;height:1px;background:rgba(255,255,255,.25)}
+.htab{padding:.3rem 0;font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.08em;font-weight:600;text-transform:uppercase;background:transparent;border:none;border-bottom:1px solid transparent;transition:all .35s}
+.htab-arch{color:rgba(255,255,255,.4)}
+.htab-art{color:rgba(255,255,255,.4)}
+.htab-arch.active,.htab-arch:hover{background:transparent;color:#fff;border-bottom-color:rgba(255,255,255,.45)}
+.htab-art.active,.htab-art:hover{background:transparent;color:#fff;border-bottom-color:rgba(255,255,255,.45)}
+.hero-bio{font-family:'Inter',sans-serif;font-size:.88rem;line-height:1.9;color:rgba(255,255,255,.6);max-width:500px;margin-bottom:2.8rem;animation:up .8s .65s both}
+.hero-actions{display:flex;gap:1rem;justify-content:center;animation:up .8s .85s both}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.3);animation:fi 1s 1.4s both;z-index:3}
+.scroll-bar{width:1px;height:50px;background:rgba(255,255,255,.35);animation:pulse 2.2s infinite}
+
+.hw{padding:4rem 4rem 5rem}
+.hw.hw-arch,.hw.hw-art{background:transparent}
+.hw-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.tab-row{display:flex;gap:2rem;border:none}
+.tab-btn{padding:0 0 .45rem;font-size:.56rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;background:transparent;border:none;border-bottom:1px solid transparent;color:#6a90b0;transition:all .25s}
+.tab-btn:last-child{border-right:none}
+.tab-btn.tab-arch{background:transparent;color:#1a1a1a;border-bottom-color:#1a5fa0}
+.tab-btn.tab-art{background:transparent;color:#1a1a1a;border-bottom-color:#1a5fa0}
+.see-all{font-size:.56rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#6a90b0;background:none;border:none;transition:color .2s}
+.see-all:hover{color:#1a5fa0}
+
+.hw-grids{position:relative;overflow:hidden}
+.masonry-col{flex:1;display:flex;flex-direction:column;gap:120px}
+.img-grid{display:flex;gap:120px;align-items:flex-start;transition:opacity .5s ease}
+.img-grid:not(.show){position:absolute;top:0;left:0;right:0;opacity:0;pointer-events:none}
+.img-grid.show{opacity:1;pointer-events:auto}
+.img-cell{background:transparent;overflow:hidden;transition:opacity .3s;border-radius:0;width:100%;flex-shrink:0;position:relative}
+.img-cell img{width:100%;height:auto;display:block}
+.cell-ghost{background:transparent;pointer-events:none}
+.img-cell:hover{opacity:.8}
+.cell-ov{position:absolute;inset:0;padding:1rem;background:linear-gradient(to top,rgba(9,9,13,.82) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;gap:3px;opacity:0;transition:opacity .3s}
+.img-cell:hover .cell-ov{opacity:1}
+.ov-type{font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
+.ov-type.arch{color:#a01e35}.ov-type.art{color:#a01e35}
+.ov-title{font-size:.88rem;font-weight:600;color:#fff}
+
+.section{padding:9rem 4rem 7rem}
+.inner{max-width:1120px;margin:0 auto}
+.eyebrow{display:flex;align-items:center;gap:1rem;font-size:.54rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.8rem;color:#a01e35}
+.eyebrow::before{display:none}
+.page-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.05;letter-spacing:-.01em;margin-bottom:2.2rem}
+.page-title em{font-style:italic;font-weight:300;color:#a01e35}
+
+.about-intro{padding:8rem 4rem 2rem;max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center}
+.about-intro .eyebrow{align-self:flex-start}
+.about-intro-name{font-family:'Cormorant Garamond',serif;font-size:clamp(4.5rem,9vw,9rem);font-weight:500;line-height:.95;letter-spacing:-.02em;color:#1a1a1a;margin-top:.6rem}
+.about-intro-name em{font-style:italic;color:#a01e35}
+.about-trio{display:grid;grid-template-columns:1fr 260px 1fr;gap:3.5rem;align-items:center;max-width:1100px;margin:3rem auto;padding:0 4rem}
+.about-trio-text{font-family:'Inter',sans-serif;font-size:.85rem;line-height:1.95;color:#6a90b0}
+.about-trio-text strong{color:#a01e35;font-weight:600}
+.about-trio-img{width:100%;height:380px;object-fit:cover;object-position:top;display:block}
+.studios-section,.skills-section{padding:0 4rem;max-width:1100px;margin:0 auto 5rem}
+.studios-num,.skills-num{font-size:.52rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#a01e35;margin-bottom:2.5rem;display:flex;align-items:center;gap:.8rem}
+.studios-num::after,.skills-num::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.12)}
+.studio-item{display:flex;justify-content:space-between;align-items:center;padding:1.8rem 0;border-bottom:1px solid rgba(0,0,0,.08);overflow:hidden}
+.studio-item:first-child{border-top:1px solid rgba(0,0,0,.08)}
+.studio-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);font-weight:300;letter-spacing:.01em;color:#1a1a1a;transition:color .3s}
+.studio-item:hover .studio-name{color:#1a5fa0}
+.studio-meta{text-align:right;opacity:0;transform:translateX(12px);transition:all .35s}
+.studio-item:hover .studio-meta{opacity:1;transform:translateX(0)}
+.studio-role{display:block;font-family:'Inter',sans-serif;font-size:.72rem;color:#6a90b0;margin-bottom:.2rem}
+.studio-date{font-size:.52rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a01e35}
+.skills-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem}
+.skill-col-head{font-size:.52rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#6a90b0;margin-bottom:1rem;display:flex;align-items:center;gap:.7rem}
+.about-actions{display:flex;gap:1rem;justify-content:center;padding:1rem 4rem 6rem;flex-wrap:wrap}
+.s-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sd-blue{background:#a01e35}.sd-art{background:#a01e35}.sd-grey{background:#6a90b0}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-size:.52rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.28rem .78rem;border:none;color:#6a90b0;transition:color .2s}
+.tag:hover{color:#1a1a1a}
+.tag.art:hover{color:#1a1a1a}
+.about-photo{width:100%;display:block;border-radius:0;margin-bottom:2.2rem;object-fit:cover}
+.about-text p{font-family:'Inter',sans-serif;font-size:.88rem;line-height:1.95;color:#6a90b0;margin-bottom:1.2rem}
+.about-text strong{color:#1a1a1a;font-weight:700}
+.timeline{margin-top:2rem}
+.tl-item{display:grid;grid-template-columns:auto 1fr;gap:0 1.3rem;margin-bottom:1.9rem;padding-bottom:1.9rem}
+.tl-item:last-child{margin-bottom:0;padding-bottom:0}
+.tl-dot-col{display:flex;flex-direction:column;align-items:center;padding-top:4px}
+.tl-dot{width:8px;height:8px;border-radius:50%;background:#1a5fa0;flex-shrink:0;box-shadow:0 0 8px rgba(26,95,160,.4)}
+.tl-dot.alt{background:#1a5fa0;box-shadow:none}
+.tl-line{width:1px;flex:1;background:rgba(0,0,0,.1);margin-top:5px}
+.tl-date{font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#6a90b0;margin-bottom:.25rem}
+.tl-role{font-size:.8rem;font-weight:700;color:#1a1a1a;margin-bottom:.18rem}
+.tl-co{font-size:.7rem;font-weight:600;color:#a01e35;margin-bottom:.45rem}
+.tl-desc{font-family:'Inter',sans-serif;font-size:.8rem;line-height:1.8;color:#6a90b0}
+
+.work-tabs{display:flex;gap:2rem;border:none;width:fit-content;margin-bottom:2rem}
+.work-tab{padding:0 0 .45rem;font-size:.56rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;background:transparent;border:none;border-bottom:1px solid transparent;color:#6a90b0;transition:all .25s}
+.work-tab:last-child{border-right:none}
+.work-tab.wt-arch{background:transparent;color:#1a1a1a;border-bottom-color:#1a5fa0}
+.work-tab.wt-art{background:transparent;color:#1a1a1a;border-bottom-color:#1a5fa0}
+.work-panel{display:none}.work-panel.active{display:block}
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem}
+.proj-card{background:transparent;padding:2.2rem 0;position:relative;overflow:hidden;transition:opacity .3s}
+.proj-card:hover{opacity:.8}
+.proj-card.full{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.proj-num{font-size:3.2rem;font-weight:200;letter-spacing:.05em;color:rgba(255,255,255,.04);position:absolute;top:.5rem;right:1rem;line-height:1;pointer-events:none}
+.proj-type{font-size:.5rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;margin-bottom:.7rem}
+.proj-type.arch{color:#a01e35}.proj-type.art{color:#a01e35}
+.proj-title{font-size:1.2rem;font-weight:700;line-height:1.25;margin-bottom:.6rem}
+.proj-desc{font-family:'Inter',sans-serif;font-size:.82rem;line-height:1.85;color:#6a90b0;margin-bottom:1rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+.proj-tag{font-size:.48rem;letter-spacing:.04em;font-weight:600;text-transform:uppercase;padding:.22rem .6rem 0 0;color:#6a90b0}
+.proj-link{font-size:.54rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s}
+.proj-link.arch{color:#1a5fa0}.proj-link.arch:hover{border-color:#1a5fa0}
+.proj-link.art{color:#1a5fa0}.proj-link.art:hover{border-color:#1a5fa0}
+.img-ph{width:100%;aspect-ratio:4/3;background:rgba(255,255,255,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;font-family:'Inter',sans-serif;font-size:.54rem;letter-spacing:.04em;text-transform:uppercase;color:#6a90b0}
+.img-ph-icon{font-size:1.8rem;opacity:.18}
+
+.blog-top{padding:9rem 4rem 3rem}
+.blog-top-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end}
+.blog-desc{font-family:'Inter',sans-serif;font-size:.88rem;line-height:1.85;color:#6a90b0;max-width:400px}
+.blog-body{padding:3.5rem 4rem}
+.blog-inner{max-width:1120px;margin:0 auto}
+.blog-cats{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.2rem}
+.blog-cat{font-size:.52rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.36rem .9rem 0;color:#6a90b0;background:transparent;border:none;transition:color .2s}
+.blog-cat.on,.blog-cat:hover{color:#1a1a1a}
+.featured{background:transparent;border:none;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;transition:opacity .3s;margin-bottom:2rem}
+.featured::before{display:none}
+.featured:hover{opacity:.8}
+.feat-img{min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;background:rgba(255,255,255,.04);font-family:'Inter',sans-serif;font-size:.54rem;letter-spacing:.05em;text-transform:uppercase;color:#6a90b0}
+.feat-body{padding:2.5rem 2.5rem 2.5rem 0}
+.feat-cat{font-size:.5rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#1a5fa0;margin-bottom:.7rem}
+.feat-title{font-size:1.3rem;font-weight:700;line-height:1.25;margin-bottom:.8rem}
+.feat-meta{display:flex;gap:.8rem;align-items:center;font-family:'Inter',sans-serif;font-size:.72rem;color:#6a90b0;margin-bottom:1rem}
+.feat-meta-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);display:inline-block}
+.feat-exc{font-family:'Inter',sans-serif;font-size:.82rem;line-height:1.85;color:#6a90b0;margin-bottom:1.2rem}
+.feat-read{font-size:.54rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#1a5fa0;border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .2s}
+.feat-read:hover{border-color:#1a5fa0}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3rem;margin-top:1rem}
+.blog-card{background:transparent;padding:0;transition:opacity .3s;position:relative;overflow:hidden}
+.blog-card:hover{opacity:.7}
+.blog-cat-label{font-size:.48rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#a01e35;margin-bottom:.8rem}
+.blog-cat-label.art{color:#a01e35}
+.blog-title{font-size:.92rem;font-weight:700;line-height:1.3;margin-bottom:.6rem}
+.blog-exc{font-family:'Inter',sans-serif;font-size:.8rem;line-height:1.8;color:#6a90b0;margin-bottom:1rem}
+.blog-foot{display:flex;justify-content:space-between;align-items:center}
+.blog-date{font-family:'Inter',sans-serif;font-size:.7rem;color:#6a90b0}
+.blog-read{font-size:.5rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#1a5fa0;transition:opacity .2s}
+.blog-read:hover{opacity:.6}.blog-read.art{color:#1a5fa0}
+
+a.studio-item{text-decoration:none;display:flex}
+.cnt-form{max-width:640px}
+.cnt-cols{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
+.cnt-title{font-size:2rem;font-weight:700;line-height:1.1;margin-bottom:1.2rem}
+.cnt-title em{font-style:italic;font-weight:300;color:#a01e35}
+.cnt-sub{font-family:'Inter',sans-serif;font-size:.82rem;color:#6a90b0;line-height:1.85;margin-bottom:2rem}
+.cnt-row{display:flex;gap:1rem;align-items:flex-start;padding:.8rem 0}
+.cnt-key{font-size:.48rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#1a5fa0;width:56px;flex-shrink:0;padding-top:2px}
+.cnt-val{font-family:'Inter',sans-serif;font-size:.82rem;color:#6a90b0}
+.cnt-val a{color:#6a90b0;transition:color .2s}.cnt-val a:hover{color:#1a5fa0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.48rem;letter-spacing:.06em;font-weight:700;text-transform:uppercase;color:#6a90b0;margin-bottom:.45rem}
+.field input,.field textarea,.field select{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(0,0,0,.12);color:#1a1a1a;font-family:'Inter',sans-serif;font-size:.82rem;padding:.8rem 0;outline:none;transition:border-color .2s;appearance:none;resize:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-bottom-color:#1a5fa0}
+.field textarea{height:110px}
+.submit-btn{width:100%;padding:.95rem;background:#1a5fa0;color:#fff;font-family:'Inter',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;border:none;transition:background .3s}
+.submit-btn:hover{background:#3d6080}
+
+footer{padding:2.2rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.footer-name{font-weight:700;font-size:.72rem;letter-spacing:.1em;color:#6a90b0}
+.footer-links{display:flex;gap:1.8rem}
+.footer-links button,.footer-links a{font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.06em;color:#6a90b0;background:none;border:none;transition:color .2s}
+.footer-links button:hover,.footer-links a:hover{color:#1a5fa0}
+.footer-cr{font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(0,0,0,.3)}
+
+#shop-detail{display:none}
+#shop-detail.open{display:block}
+.shop-detail-top{display:flex;gap:5rem;align-items:flex-start;margin-bottom:5rem}
+.shop-detail-img{flex-shrink:0;max-width:45%}
+.shop-detail-img img{width:100%;height:auto;display:block}
+.shop-detail-back{font-size:.5rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#8a8898;background:none;border:none;cursor:none;margin-bottom:3rem;display:block;padding:0;transition:color .2s}
+.shop-detail-back:hover{color:#1a1a1a}
+.shop-detail-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:400;color:#1a1a1a;margin-bottom:1.5rem}
+.shop-detail-desc{font-family:'Inter',sans-serif;font-size:.82rem;line-height:2;color:rgba(0,0,0,.6);margin-bottom:2rem}
+.shop-detail-desc p{margin-bottom:.8rem}
+.shop-detail-price{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:#1a1a1a;margin-bottom:2rem}
+.shop-detail-buy{font-size:.52rem;letter-spacing:.08em;font-weight:700;text-transform:uppercase;color:#1a5fa0;background:none;border:none;border-bottom:1px solid #1a5fa0;padding:0 0 3px;cursor:none}
+.shop-also-label{font-size:.48rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#8a8898;margin-bottom:2rem;display:block}
+.shop-also-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+#zoom-lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);align-items:center;justify-content:center}
+#zoom-lb.open{display:flex}
+#zoom-img{max-width:90vw;max-height:90vh;object-fit:contain}
+.zoom-nav{position:fixed;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:2rem;padding:1rem;opacity:.5;transition:opacity .2s;z-index:10000}
+.zoom-nav:hover{opacity:1}
+.zoom-prev{left:1.5rem}
+.zoom-next{right:1.5rem}
+#proj-lb{display:none;position:fixed;inset:0;z-index:9000;background:rgba(250,247,242,.97);overflow-y:auto}
+#proj-lb.open{display:block}
+.lb-close{position:fixed;top:1.8rem;right:2rem;background:none;border:none;color:rgba(0,0,0,.4);font-size:.7rem;z-index:9001;letter-spacing:.07em;font-family:'Inter',sans-serif;font-weight:700;text-transform:uppercase;transition:color .2s;cursor:none}
+.lb-close:hover{color:#fff}
+.lb-scroll{max-width:820px;margin:0 auto;padding:6rem 2rem 6rem}
+.lb-header{margin-bottom:3.5rem}
+.lb-proj-type{font-size:.48rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#1a5fa0;display:block;margin-bottom:.9rem}
+.lb-proj-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;color:#1a1a1a;line-height:1.05;margin-bottom:1.2rem}
+.lb-proj-semester{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:rgba(0,0,0,.5);display:block;margin-bottom:.6rem}
+.lb-proj-tagline{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:#1a1a1a;line-height:1.3;margin-bottom:1.4rem}
+.lb-proj-desc{font-family:'Inter',sans-serif;font-size:.88rem;line-height:1.9;color:rgba(0,0,0,.55)}
+.lb-images{display:flex;flex-direction:column;gap:2rem}
+.lb-images img{width:100%;display:block}
+
+.shop-layout{display:grid;grid-template-columns:220px 1fr;gap:6rem;align-items:start}
+.shop-sidebar{position:sticky;top:6rem}
+.shop-sidebar-text{font-family:'Inter',sans-serif;font-size:.82rem;color:#8a8898;line-height:1.9}
+.shop-sidebar-text p{margin-bottom:1.2rem}
+.shop-grid{columns:3;column-gap:3rem}
+.shop-item{break-inside:avoid;margin-bottom:3.5rem}
+.shop-item img{width:100%;display:block;margin-bottom:.9rem;transition:opacity .3s}
+.shop-item:hover img{opacity:.75}
+.shop-item-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:#1a1a1a}
+.shop-item-price{font-family:'Inter',sans-serif;font-size:.75rem;color:#8a8898;margin-bottom:.4rem}
+.shop-item-buy{font-size:.48rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#1a5fa0;background:none;border:none;border-bottom:1px solid transparent;padding:0 0 2px;transition:border-color .2s;cursor:none}
+.shop-item-buy:hover{border-bottom-color:#1a5fa0}
+
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;z-index:1001;cursor:none}
+.nav-burger span{width:22px;height:1.5px;background:#1a1a1a;display:block;transition:all .15s}
+nav.stuck .nav-burger span{background:#1a1a1a}
+.nav-burger.open span{background:#1a1a1a}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{display:flex;position:fixed;inset:0;background:#FAF7F2;z-index:1000;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s}
+.mobile-menu.open{opacity:1;pointer-events:auto}
+.mobile-menu ul{list-style:none;width:calc(100% - 8rem);max-width:320px}
+.mobile-menu li{border-bottom:1px solid rgba(0,0,0,.07)}
+.mobile-menu li:first-child{border-top:1px solid rgba(0,0,0,.07)}
+nav.menu-open{z-index:1001}
+nav.menu-open .nav-burger span{background:#1a1a1a!important}
+nav.menu-open .nav-logo{opacity:0;pointer-events:none}
+.mobile-menu button{font-family:'Inter',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1a1a1a;padding:1.4rem 0;width:100%;background:none;border:none;text-align:center;cursor:auto}
+.mobile-menu .mob-cta{color:#1a5fa0}
+
+@media(max-width:768px){
+  #cursor{display:none}
+  body{cursor:auto}
+  a,button{cursor:auto}
+
+  nav{padding:1.1rem 1.5rem}
+  nav.stuck{padding:.9rem 1.5rem}
+  .nav-burger{display:flex}
+  .nav-links{display:none;position:fixed;inset:0;background:#FAF7F2;z-index:800;flex-direction:column;align-items:center;justify-content:center;gap:0}
+  .nav-links.open{display:flex}
+  .nav-links li{width:calc(100% - 4rem);text-align:center;border-bottom:1px solid rgba(0,0,0,.07)}
+  .nav-links li:first-child{border-top:1px solid rgba(0,0,0,.07)}
+  .nav-links li[style*="display:none"]{display:none!important}
+  .nav-links button{font-size:.6rem!important;letter-spacing:.14em!important;color:#1a1a1a!important;padding:1.4rem 2rem!important;width:100%;background:none!important;border:none!important}
+  .nav-links .nav-cta{color:#1a5fa0!important;border:none!important}
+
+  .hero-inner{padding:6rem 1.5rem 5rem}
+  .hero-bio{font-size:.82rem;max-width:100%}
+  .hero-actions{flex-direction:column;gap:.8rem;width:100%;max-width:280px;margin:0 auto}
+  .hero-actions .btn{width:100%;text-align:center}
+  .hero-toggle{margin:2rem 0 1.6rem}
+
+  .hw{padding:2.5rem 1.5rem 3rem}
+  .img-grid{flex-direction:column;gap:2rem}
+  .masonry-col{gap:2rem}
+
+  .section{padding:4rem 1.5rem 3rem}
+  .about-trio{grid-template-columns:1fr;padding:0 1.5rem;gap:1.8rem;margin-top:2rem}
+  .about-intro{padding:5rem 1.5rem 1.5rem}
+  .about-trio-text{text-align:center}
+  .about-trio-img{height:380px;object-position:center;order:-1}
+  .studios-section,.skills-section{padding:0 1.5rem;margin-bottom:3rem}
+  .skills-cols{grid-template-columns:1fr;gap:2rem}
+  .studio-item{flex-direction:column;align-items:flex-start;gap:.25rem;padding:1.4rem 0}
+  .studio-meta{opacity:1;transform:none;text-align:left;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+  .studio-name{font-size:clamp(1.1rem,4vw,1.6rem)}
+  .studio-role{display:inline;font-size:.7rem}
+  .studio-date{font-size:.48rem}
+  .tag{border:none;padding:.3rem .7rem}
+  .about-actions{padding:1rem 1.5rem 4rem;flex-direction:column;align-items:stretch}
+  .about-actions .btn{text-align:center}
+
+  .shop-layout{grid-template-columns:1fr;gap:2rem}
+  .shop-sidebar{position:static}
+  .shop-grid{columns:2;column-gap:1.2rem}
+  .shop-detail-top{flex-direction:column;gap:2rem}
+  .shop-detail-img{max-width:100%}
+  .shop-also-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+
+  .cnt-cols{grid-template-columns:1fr;gap:2.5rem}
+  .form-row{grid-template-columns:1fr}
+
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.full{grid-template-columns:1fr}
+  .work-tabs{gap:1.2rem}
+
+  .blog-top{padding:4rem 1.5rem 1.5rem}
+  .blog-top-in{grid-template-columns:1fr;gap:1.5rem}
+  .blog-body{padding:2rem 1.5rem}
+  .blog-grid{grid-template-columns:1fr;gap:2rem}
+  .featured{grid-template-columns:1fr}
+  .feat-body{padding:1.5rem 0}
+
+  .lb-scroll{padding:4rem 1.5rem 3rem}
+  .lb-proj-title{font-size:clamp(1.8rem,8vw,3rem)}
+  .lb-images{gap:1rem}
+
+  footer{flex-direction:column;gap:.8rem;text-align:center;padding:1.5rem}
+  .footer-links{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<nav id="nav" class="on-hero">
+  <button class="nav-logo" onclick="goTo('home')">Sylvia <span>Innocent</span></button>
+  <ul class="nav-links" id="nav-links">
+    <li><button id="nl-work"    onclick="goToWork()">Work</button></li>
+    <li><button id="nl-about"   onclick="goTo('about')">About</button></li>
+    <li><button id="nl-shop"    onclick="goTo('shop')">Shop</button></li>
+    <li style="display:none"><button id="nl-blog"    onclick="goTo('blog')">Blog</button></li>
+    <li><button id="nl-contact" class="nav-cta" onclick="goTo('contact')">Contact</button></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><button onclick="goToWork()">Work</button></li>
+    <li><button onclick="goTo('about')">About</button></li>
+    <li><button onclick="goTo('shop')">Shop</button></li>
+    <li><button onclick="goTo('contact')" class="mob-cta">Contact</button></li>
+  </ul>
+</div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero" id="hero">
+    <div class="hero-bg hero-bg-arch" id="bg-arch"></div>
+    <div class="hero-bg hero-bg-art"  id="bg-art"></div>
+    <div class="hero-overlay hero-ov-arch" id="ov-arch"></div>
+    <div class="hero-overlay hero-ov-art"  id="ov-art" style="opacity:0"></div>
+    <div class="hero-inner">
+      <h1 class="hero-name">Sylvia<span class="hero-name-last">Innocent</span></h1>
+      <div class="hero-toggle">
+        <button class="htab htab-arch active" id="htab-arch" onmouseenter="switchHero('arch')" onclick="switchHero('arch')">Designer</button>
+        <span class="hero-toggle-sep"></span>
+        <button class="htab htab-art" id="htab-art" onmouseenter="switchHero('art')" onclick="switchHero('art')">Artist</button>
+      </div>
+      <p class="hero-bio">Crafting experiential spaces that blur the line between architecture and atmosphere, and illustrating the worlds in between.</p>
+      <div class="hero-actions">
+        <button class="btn btn-blue"  onclick="goToWork()">View Work</button>
+        <button class="btn btn-white" onclick="goTo('contact')">Get in Touch</button>
+      </div>
+    </div>
+    <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
+  </div>
+
+  <div class="hw hw-arch" id="hw-section">
+    <div class="hw-head">
+      <div class="tab-row">
+        <button class="tab-btn tab-arch" id="ht-arch" onclick="homeTab('arch')">Design</button>
+        <button class="tab-btn"          id="ht-art"  onclick="homeTab('art')">Art</button>
+      </div>
+    </div>
+    <div class="hw-grids">
+    <div class="img-grid arch-grid show" id="hg-arch">
+      <div class="masonry-col">
+        <div class="img-cell" onclick="openProjectLb('algae')"><img src="Innocent_4.webp" alt="Algae Oasis"><div class="cell-ov"><span class="ov-type arch">Academic</span><span class="ov-title">Algae Oasis</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('strata')"><img src="atrium 3.webp" alt="Strata"><div class="cell-ov"><span class="ov-type arch">Academic</span><span class="ov-title">Strata</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('morgante')"><img src="arch 4.webp" alt="Morgante Wilson"><div class="cell-ov"><span class="ov-type arch">Interior Architecture</span><span class="ov-title">Morgante Wilson</span></div></div>
+      </div>
+      <div class="masonry-col">
+        <div class="img-cell" onclick="openProjectLb('lagos')"><img src="arch 3.webp" alt="Resilient Lagos"><div class="cell-ov"><span class="ov-type arch">Academic</span><span class="ov-title">Resilient Lagos</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('morgante')"><img src="arch 8.webp" alt="Morgante Wilson"><div class="cell-ov"><span class="ov-type arch">Interior Architecture</span><span class="ov-title">Morgante Wilson</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('morgante')"><img src="arch 9.webp" alt="Morgante Wilson"><div class="cell-ov"><span class="ov-type arch">Interior Architecture</span><span class="ov-title">Morgante Wilson</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('havenly')"><img src="Living Room 1.webp" alt="Havenly"><div class="cell-ov"><span class="ov-type arch">Interior Design</span><span class="ov-title">Havenly</span></div></div>
+      </div>
+      <div class="masonry-col">
+        <div class="img-cell" onclick="openProjectLb('strata')"><img src="ext final 2.webp" alt="Strata"><div class="cell-ov"><span class="ov-type arch">Academic</span><span class="ov-title">Strata</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('morgante')"><img src="arch 7.webp" alt="Morgante Wilson"><div class="cell-ov"><span class="ov-type arch">Interior Architecture</span><span class="ov-title">Morgante Wilson</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('havenly')"><img src="Dining room 1.webp" alt="Havenly"><div class="cell-ov"><span class="ov-type arch">Interior Design</span><span class="ov-title">Havenly</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('havenly')"><img src="louiza.webp" alt="Havenly"><div class="cell-ov"><span class="ov-type arch">Interior Design</span><span class="ov-title">Havenly</span></div></div>
+      </div>
+    </div>
+    <div class="img-grid art-grid" id="hg-art">
+      <div class="masonry-col">
+        <div class="img-cell" onclick="openProjectLb('rue')"><img src="art 3.webp" alt="Rue"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Rue</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('ego')"><img src="art 0.webp" alt="Ego Phantom"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Ego Phantom</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('style')"><img src="illust.webp" alt="Style Study"><div class="cell-ov"><span class="ov-type art">Illustration</span><span class="ov-title">Style Study</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('apparel')"><img src="art4.webp" alt="Apparel Design"><div class="cell-ov"><span class="ov-type art">Apparel</span><span class="ov-title">Apparel Design</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('apparel')"><img src="aparrel.webp" alt="Apparel Design"><div class="cell-ov"><span class="ov-type art">Apparel</span><span class="ov-title">Apparel Design</span></div></div>
+      </div>
+      <div class="masonry-col">
+        <div class="img-cell" onclick="openProjectLb('hingenough')"><img src="art 10.webp" alt="Have I Not Given Enough"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Have I Not Given Enough</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('family')"><img src="art 13.webp" alt="Family"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Family</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('sanguine')"><img src="2024_3.webp" alt="Sanguine"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Sanguine</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('pulp')"><img src="art 2.webp" alt="Pulp Fiction"><div class="cell-ov"><span class="ov-type art">Illustration</span><span class="ov-title">Pulp Fiction</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('secrets')"><img src="graphic design.webp" alt="Secrets Poster"><div class="cell-ov"><span class="ov-type art">Graphic Design</span><span class="ov-title">Secrets Poster</span></div></div>
+      </div>
+      <div class="masonry-col">
+        <div class="img-cell" onclick="openProjectLb('growingpains')"><img src="art11.webp" alt="Growing Pains"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Growing Pains</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('robin')"><img src="art 14.webp" alt="Robin"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Robin</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('hope')"><img src="hope.webp" alt="Hope"><div class="cell-ov"><span class="ov-type art">Digital Art</span><span class="ov-title">Hope</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('style')"><img src="illust 3.webp" alt="Style Study"><div class="cell-ov"><span class="ov-type art">Illustration</span><span class="ov-title">Style Study</span></div></div>
+        <div class="img-cell" onclick="openProjectLb('hope')"><img src="art 9.webp" alt="Hope"><div class="cell-ov"><span class="ov-type art">Graphic Design</span><span class="ov-title">Hope</span></div></div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <footer>
+    <span class="footer-name">Sylvia Innocent</span>
+    <div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a><button onclick="goToWork()">Work</button></div>
+    <span class="footer-cr">© 2026 Sylvia Innocent</span>
+  </footer>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+
+  <div class="about-intro">
+    <div class="eyebrow">About</div>
+    <h1 class="about-intro-name">Design.<br><em>Art.</em> Both.</h1>
+  </div>
+
+  <div class="about-trio">
+    <div class="about-trio-text">
+      <p>I'm Sylvia Innocent — equally at home developing construction documents as I am crafting a digital illustration. My practice lives at the edge of two disciplines, and I wouldn't have it any other way.</p>
+    </div>
+    <img src="about-hero.webp" alt="Sylvia Innocent" class="about-trio-img">
+    <div class="about-trio-text">
+      <p>My <strong>MArch from the School of the Art Institute of Chicago</strong> shaped a deeply interdisciplinary approach. Currently at FitzGerald, working across architecture and interior design. I believe the best spaces tell stories — and so does the best art.</p>
+    </div>
+  </div>
+
+  <div class="studios-section">
+    <div class="studios-num"><span>①</span> Studios & Institutions</div>
+    <div class="studios-list">
+      <div class="studio-item">
+        <span class="studio-name">FitzGerald</span>
+        <div class="studio-meta">
+          <span class="studio-role">Associate Architect</span>
+          <span class="studio-date">Apr 2026 – Present</span>
+        </div>
+      </div>
+      <div class="studio-item">
+        <span class="studio-name">Dunne Kozlowski</span>
+        <div class="studio-meta">
+          <span class="studio-role">Architectural Associate</span>
+          <span class="studio-date">2025 – Apr 2026</span>
+        </div>
+      </div>
+      <div class="studio-item">
+        <span class="studio-name">Havenly</span>
+        <div class="studio-meta">
+          <span class="studio-role">Junior Designer</span>
+<span class="studio-date">2025 – Present</span>
+        </div>
+      </div>
+      <div class="studio-item">
+        <span class="studio-name">Morgante Wilson Architects</span>
+        <div class="studio-meta">
+          <span class="studio-role">Interior Design Assistant</span>
+          <span class="studio-date">July 2023 – 2025</span>
+        </div>
+      </div>
+      <div class="studio-item">
+        <span class="studio-name">School of the Art Institute of Chicago</span>
+        <div class="studio-meta">
+          <span class="studio-role">Teaching Assistant — Studio 4, MArch</span>
+          <span class="studio-date">Feb – May 2023</span>
+        </div>
+      </div>
+      <div class="studio-item">
+        <span class="studio-name">Godark Praktiko Ltd.</span>
+        <div class="studio-meta">
+          <span class="studio-role">Junior Architectural Designer</span>
+          <span class="studio-date">Jan 2021 – Aug 2022</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="skills-section">
+    <div class="skills-num"><span>②</span> Disciplines & Tools</div>
+    <div class="skills-cols">
+      <div>
+        <div class="skill-col-head"><span class="s-dot sd-blue"></span>Architecture & Interior</div>
+        <div class="tags"><span class="tag">Autodesk Revit</span><span class="tag">AutoCAD</span><span class="tag">SketchUp</span><span class="tag">Rhinoceros</span><span class="tag">Grasshopper</span><span class="tag">Enscape</span><span class="tag">Space Planning</span><span class="tag">FF&E</span><span class="tag">3D Visualization</span><span class="tag">Color Theory</span><span class="tag">MEP Coordination</span></div>
+      </div>
+      <div>
+        <div class="skill-col-head"><span class="s-dot sd-art"></span>Art & Creative</div>
+        <div class="tags"><span class="tag art">Photoshop</span><span class="tag art">Illustrator</span><span class="tag art">InDesign</span><span class="tag art">Procreate</span><span class="tag art">Blender</span><span class="tag art">Midjourney</span><span class="tag art">Typography</span><span class="tag art">Apparel Design</span><span class="tag art">Illustration</span></div>
+      </div>
+      <div>
+        <div class="skill-col-head"><span class="s-dot sd-grey"></span>Studio Tools</div>
+        <div class="tags"><span class="tag">Studio Designer</span><span class="tag">StyleRow</span><span class="tag">Discord</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-actions">
+    <a href="Sylvia_Innocent_Resume__2_.pdf" download class="btn btn-blue">Download CV</a>
+    <button class="btn btn-ghost" onclick="goTo('contact')">Get in Touch</button>
+  </div>
+
+  <footer><span class="footer-name">Sylvia Innocent</span><div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a><button onclick="goToWork()">Work</button></div><span class="footer-cr">© 2026 Sylvia Innocent</span></footer>
+</div>
+
+<!-- SHOP -->
+<div class="page" id="page-shop">
+  <div class="section">
+    <div class="inner">
+      <div id="shop-detail">
+        <button class="shop-detail-back" onclick="closeShopLb()">← Back to Shop</button>
+        <div class="shop-detail-top">
+          <div class="shop-detail-img"><img id="shop-lb-img" src=""></div>
+          <div>
+            <h2 class="shop-detail-title" id="shop-lb-title"></h2>
+            <div class="shop-detail-desc" id="shop-lb-desc"></div>
+            <div class="shop-detail-price" id="shop-lb-price"></div>
+            <button class="shop-detail-buy" id="shop-lb-buy">Inquire →</button>
+          </div>
+        </div>
+        <span class="shop-also-label">You might also like</span>
+        <div class="shop-also-grid" id="shop-also-grid"></div>
+      </div>
+      <div id="shop-main">
+      <div class="shop-layout">
+        <div class="shop-sidebar">
+          <div class="eyebrow" style="margin-bottom:1.2rem">Shop</div>
+          <div class="shop-sidebar-text">
+            <p>Original digital artwork available as fine art prints, printed on archival paper.</p>
+            <p>$25 each. Inquire to order — I'll get back to you within 48 hours.</p>
+          </div>
+        </div>
+        <div class="shop-grid">
+          <div class="shop-item" onclick="openShopLb('rue')"><img src="art 3.webp" alt="Rue"><div class="shop-item-title">Rue</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('ego')"><img src="art 0.webp" alt="Ego Phantom"><div class="shop-item-title">Ego Phantom</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('hingenough')"><img src="art 10.webp" alt="Have I Not Given Enough"><div class="shop-item-title">Have I Not Given Enough</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('family')"><img src="art 13.webp" alt="Family"><div class="shop-item-title">Family</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('sanguine')"><img src="2024_3.webp" alt="Sanguine"><div class="shop-item-title">Sanguine</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('growingpains')"><img src="art11.webp" alt="Growing Pains"><div class="shop-item-title">Growing Pains</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('robin')"><img src="art 14.webp" alt="Robin"><div class="shop-item-title">Robin</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('hope')"><img src="hope.webp" alt="Hope"><div class="shop-item-title">Hope</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('style')"><img src="illust.webp" alt="Style Study"><div class="shop-item-title">Style Study</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('pulp')"><img src="art 2.webp" alt="Pulp Fiction"><div class="shop-item-title">Pulp Fiction</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('apparel')"><img src="art4.webp" alt="Apparel Design"><div class="shop-item-title">Apparel Design</div><div class="shop-item-price">$25</div></div>
+          <div class="shop-item" onclick="openShopLb('secrets')"><img src="graphic design.webp" alt="Secrets Poster"><div class="shop-item-title">Secrets Poster</div><div class="shop-item-price">$25</div></div>
+        </div>
+      </div>
+      </div><!-- end shop-main -->
+    </div>
+  </div>
+  <footer><span class="footer-name">Sylvia Innocent</span><div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a><button onclick="goToWork()">Work</button></div><span class="footer-cr">© 2026 Sylvia Innocent</span></footer>
+</div>
+
+<!-- BLOG -->
+<div class="page" id="page-blog" style="display:none">
+  <div class="blog-top">
+    <div class="blog-top-in">
+      <div><div class="eyebrow">Writing</div><h2 class="page-title" style="margin-bottom:0">Notes on <em>Design</em><br>& Craft</h2></div>
+      <p class="blog-desc">Reflections on architecture, interior design, illustration, and the creative process — from the studio and the sketchbook. <a href="https://iceandcoffee.substack.com" target="_blank" style="color:#1a5fa0;text-decoration:none;border-bottom:1px solid #1a5fa0">Read on Substack →</a></p>
+    </div>
+  </div>
+  <div class="blog-body">
+    <div class="blog-inner">
+      <div class="featured" id="blog-featured" data-cat="arch">
+        <div class="feat-img"><span style="font-size:2rem;opacity:.18">+</span><span>Add cover image</span></div>
+        <div class="feat-body">
+          <div class="feat-cat">Art & Culture</div>
+          <h3 class="feat-title">what to do when you feel disconnected from your work</h3>
+          <div class="feat-meta"><span>Jan 24, 2026</span></div>
+          <p class="feat-exc">I wish this were a tutorial.</p>
+          <a href="https://iceandcoffee.substack.com/p/what-to-do-when-you-feel-disconnected" target="_blank" class="feat-read">Read Article →</a>
+        </div>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card art-card" data-cat="art"><div class="blog-cat-label art">Art & Culture</div><h3 class="blog-title">on a quest to finding like minded people</h3><p class="blog-exc">finally, a substack.</p><div class="blog-foot"><span class="blog-date">Jan 24, 2026</span><a href="https://iceandcoffee.substack.com/p/on-a-quest-to-finding-like-minded" target="_blank" class="blog-read art">Read →</a></div></div>
+        <div class="blog-card art-card" data-cat="art"><div class="blog-cat-label art">Art & Culture</div><h3 class="blog-title">do you make work for yourself or for others?</h3><p class="blog-exc">A fortune cookie said "find something to contribute to your community" — and it hit different.</p><div class="blog-foot"><span class="blog-date">Jan 25, 2026</span><a href="https://iceandcoffee.substack.com/p/do-you-make-work-for-yourself-or" target="_blank" class="blog-read art">Read →</a></div></div>
+        <div class="blog-card art-card" data-cat="art"><div class="blog-cat-label art">Art & Culture</div><h3 class="blog-title">are you in a creative ditch?</h3><p class="blog-exc"></p><div class="blog-foot"><a href="https://iceandcoffee.substack.com/p/are-you-in-a-creative-ditch" target="_blank" class="blog-read art">Read →</a></div></div>
+      </div>
+    </div>
+  </div>
+  <footer><span class="footer-name">Sylvia Innocent</span><div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a><button onclick="goToWork()">Work</button></div><span class="footer-cr">© 2026 Sylvia Innocent</span></footer>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <div class="section" style="padding-top:8rem">
+    <div class="inner">
+      <div class="cnt-cols">
+        <div>
+          <div class="eyebrow">Contact</div>
+          <h2 class="cnt-title">Let's build<br>something <em>together</em></h2>
+          <p class="cnt-sub">Whether you're looking for an architectural collaborator, an interior designer, or a commissioned illustrator — I'd love to hear from you.</p>
+          <div class="cnt-row"><span class="cnt-key">Email</span><span class="cnt-val"><a href="mailto:inniesia@gmail.com">inniesia@gmail.com</a></span></div>
+          <div class="cnt-row"><span class="cnt-key">Phone</span><span class="cnt-val"><a href="tel:+17735807925">+1 (773) 580 7925</a></span></div>
+          <div class="cnt-row"><span class="cnt-key">Location</span><span class="cnt-val">Chicago, Illinois, USA</span></div>
+          <div class="cnt-row"><span class="cnt-key">LinkedIn</span><span class="cnt-val"><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">linkedin.com/in/sylvia-innocent</a></span></div>
+          <div class="cnt-row"><span class="cnt-key">Status</span><span class="cnt-val" style="color:#1a5fa0">● Available for opportunities</span></div>
+          <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+            <a href="Sylvia_Innocent_Resume__2_.pdf" download class="btn btn-blue">Download CV</a>
+          </div>
+        </div>
+        <div>
+          <div class="form-row">
+            <div class="field"><label>First name</label><input type="text" placeholder="Jane"></div>
+            <div class="field"><label>Last name</label><input type="text" placeholder="Smith"></div>
+          </div>
+          <div class="field"><label>Email</label><input type="email" placeholder="jane@example.com"></div>
+          <div class="field"><label>Project type</label><select><option value="">Select one...</option><option>Architecture / Interior Design</option><option>Illustration / Artwork Commission</option><option>Employment Opportunity</option><option>Other</option></select></div>
+          <div class="field"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div>
+          <button class="submit-btn" onclick="alert('Connect to Formspree.io to activate!')">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><span class="footer-name">Sylvia Innocent</span><div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a><button onclick="goToWork()">Work</button></div><span class="footer-cr">© 2026 Sylvia Innocent</span></footer>
+</div>
+
+
+<div id="zoom-lb">
+  <button class="zoom-nav zoom-prev" onclick="zoomNav(-1)">&#8592;</button>
+  <img id="zoom-img" src="">
+  <button class="zoom-nav zoom-next" onclick="zoomNav(1)">&#8594;</button>
+</div>
+
+<div id="proj-lb">
+  <button class="lb-close" onclick="closeProjLb()">✕ Close</button>
+  <div class="lb-scroll">
+    <div class="lb-header">
+      <span class="lb-proj-type" id="lb-type"></span>
+      <h2 class="lb-proj-title" id="lb-title"></h2>
+      <span class="lb-proj-semester" id="lb-semester"></span>
+      <p class="lb-proj-tagline" id="lb-tagline"></p>
+      <p class="lb-proj-desc" id="lb-desc"></p>
+    </div>
+    <div class="lb-images" id="lb-images"></div>
+  </div>
+</div>
+
+<script>
+const cursor=document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+document.querySelectorAll('a,button,.img-cell,.proj-card,.blog-card,.featured,.zoom-nav,#zoom-img').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav');
+  const stuck=scrollY>60;
+  nav.classList.toggle('stuck',stuck);
+  const onHome=document.getElementById('page-home').classList.contains('active');
+  nav.classList.toggle('on-hero',onHome&&!stuck);
+});
+
+function toggleMobileNav(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+  document.getElementById('nav-burger').classList.toggle('open');
+  document.getElementById('nav').classList.toggle('menu-open');
+}
+function closeMobileNav(){
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('nav-burger').classList.remove('open');
+  document.getElementById('nav').classList.remove('menu-open');
+}
+
+function _showPage(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  const nl=document.getElementById('nl-'+p);if(nl)nl.classList.add('active');
+  window.scrollTo(0,0);
+  closeMobileNav();
+  const nav=document.getElementById('nav');
+  nav.classList.remove('stuck');
+  nav.classList.toggle('on-hero',p==='home');
+}
+function _showWork(){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nl-work').classList.add('active');
+  closeMobileNav();
+  setTimeout(()=>document.getElementById('hw-section').scrollIntoView({behavior:'smooth'}),50);
+}
+function goTo(p){_showPage(p);history.pushState({page:p},'',p==='home'?'/':'/'+p);}
+
+window.addEventListener('popstate',e=>{
+  const p=(e.state&&e.state.page)||'home';
+  if(p==='work')_showWork();else _showPage(p);
+});
+(function(){
+  const path=location.pathname.replace(/^\//,'').replace(/\/$/,'')||'home';
+  if(path==='work'){_showWork();history.replaceState({page:'work'},'','/work');}
+  else if(document.getElementById('page-'+path)){_showPage(path);history.replaceState({page:path},'',path==='home'?'/':'/'+path);}
+})();
+
+function switchHero(mode){
+  const bgArt=document.getElementById('bg-art');
+  const ovArch=document.getElementById('ov-arch');
+  const ovArt=document.getElementById('ov-art');
+  document.getElementById('htab-arch').classList.toggle('active',mode==='arch');
+  document.getElementById('htab-art').classList.toggle('active',mode==='art');
+  bgArt.style.opacity=mode==='art'?'1':'0';
+  ovArch.style.opacity=mode==='arch'?'1':'0';
+  ovArt.style.opacity=mode==='art'?'1':'0';
+  const hw=document.getElementById('hw-section');
+  hw.className='hw '+(mode==='arch'?'hw-arch':'hw-art');
+}
+
+function homeTab(t){
+  document.getElementById('ht-arch').className='tab-btn'+(t==='arch'?' tab-arch':'');
+  document.getElementById('ht-art').className='tab-btn'+(t==='art'?' tab-art':'');
+  document.getElementById('hg-arch').classList.toggle('show',t==='arch');
+  document.getElementById('hg-art').classList.toggle('show',t==='art');
+}
+
+function goToWork(){_showWork();history.pushState({page:'work'},'','/work');}
+
+const projects={
+  lagos:{type:'Academic — SAIC MArch',title:'Resilient Lagos',semester:'MArch Thesis; Spring 2025',tagline:'Coastal living: resilient spaces for a seasonal landscape',desc:'Lagos, one of Africa\'s most populous and culturally vibrant cities, is shaped by dynamic cycles of growth, migration, and celebration. Each December, the city experiences a dramatic surge in tourism that fuels its hospitality and nightlife sectors. Yet when the season ends, these same spaces often fall into periods of disuse, revealing a disconnect between short-term tourism infrastructure and long-term community needs. The retreat shifts between two main configurations. This modular approach allows the site to stay active and relevant throughout the year.<br><br>Tools used: Revit, Rhino 3D, Enscape, Adobe Photoshop, Adobe Illustrator',images:['arch 3.webp','thesis 1.webp','Neighborhood Map/f4f32116-1.webp','Site Context and Character/0c874e49-1.webp','Programming Landscape/de422eb7-1.webp','thesis 2.webp','Coastal Landscape/ab6a587a-1.webp','Flood Risk and Concept/e44fd20a-1.webp','Site Plan wo text/fa1a7a22-1.webp','thesis 3.png','AXON FINAL/9baed760-1.webp','art studio.webp','bedroom.webp','courtyard.webp','Ext 5.webp','ext 8.webp','int 1_1.webp','int 3.webp']},
+  strata:{type:'Academic — SAIC MArch',title:'Strata',semester:'Fall semester 2024',tagline:"School of the Art Institute 'Bouleuterion'",desc:'The design concept uses stacked boxes to symbolize the multidisciplinary nature of the programs housed within the building. Each "box" represents a distinct activity or program, visually narrating how diverse disciplines coexist and interact. Inspired by the concept of a Bouleuterion—a place for assembly and dialogue—the design emphasizes collaboration and celebrates the study of art as a unifying force. This stacking creates a dynamic hub for learning, creativity, and connection, reflecting the building\'s core purpose. The modular arrangement fosters adaptability, allowing the site to evolve alongside the changing needs of its users while maintaining a cohesive and flexible design.<br><br>Tools used: Revit, Rhino 3D, Enscape, Adobe Photoshop, Adobe Illustrator',images:['atrium 3.webp','indoor outdoor terrace.webp','ext final 2.webp','cinema 2.webp','Interior Elevation 1.pdf.webp','Interior Elevation 1.pdf (2).webp','THE SITE.webp']},
+  algae:{type:'Academic — SAIC MArch',title:'Algae Oasis',semester:'Spring semester 2023',tagline:'A field station for researchers at the McCook Quarry',desc:'Algae Oasis is an innovative architectural design project that integrates a parametric wall system featuring algae cultivation. The project aims to create a sustainable and visually striking solution that combines the benefits of renewable energy generation, air purification, and biophilic design principles.<br><br>This project is located in the McCook Quarry. The rehabilitation and adaptive reuse of the quarry can contribute to the restoration of the natural ecosystem while showcasing innovative approaches to environmental stewardship. By integrating sustainable practices and thoughtful design, this project gives the quarry the potential to inspire visitors, residents, and future developments to prioritize sustainable living and responsible land use practices.',images:['Innocent_4.webp','AXO FINAL rendereddd.webp','LAB FINALL final.webp','FLOOR PLANS W TEXT.pdf.webp','FLOOR PLANS W TEXT.pdf (2).webp','EXHIBIT EXT RENDERED final plssssss.webp']},
+  saic:{type:'Academic — SAIC MArch',title:'Graduate Studio',desc:'Graduate architectural studio at the School of the Art Institute of Chicago. Exploring spatial theory, parametric design, material experimentation, and the intersection of art and built form.',images:['arch3.webp','arch 3.webp','hero-arch 3.webp','arch 5.webp']},
+  morgante:{type:'Interior Architecture',title:'Morgante Wilson Architects',desc:'Interior design and architecture work at Morgante Wilson Architects — developing commercial interiors through Revit modeling, Enscape rendering, FF&E coordination, and construction documentation.',images:['arch 4.webp','arch 8.webp','arch 9.webp','arch 7.webp']},
+  havenly:{type:'Interior Design',title:'Havenly',desc:'Residential interior design work at Havenly — translating client vision into cohesive, liveable spaces through concept development, material selection, and spatial planning.',images:['Living Room 1.webp','havenly update.webp','Dining room 1.webp','Dining room 2.webp','bedroom render 1.webp','bedroom render 2.webp','louiza.webp','joseph.webp','joseph/Joseph Concept.webp','joseph/Eclectic Detail.webp','joseph/Introspective Chamber.webp','joseph/Mordern Meadow.webp']},
+  rue:{type:'Digital Art',title:'Rue',desc:'',images:['art 3.webp']},
+  ego:{type:'Digital Art',title:'Ego Phantom',desc:'',images:['art 0.webp']},
+  hingenough:{type:'Digital Art',title:'Have I Not Given Enough',desc:'',images:['art 10.webp']},
+  family:{type:'Digital Art',title:'Family',desc:'',images:['art 13.webp']},
+  sanguine:{type:'Digital Art',title:'Sanguine',desc:'',images:['2024_3.webp']},
+  growingpains:{type:'Digital Art',title:'Growing Pains',desc:'',images:['art11.webp']},
+  robin:{type:'Digital Art',title:'Robin',desc:'',images:['art 14.webp']},
+  hope:{type:'Digital Art & Graphic Design',title:'Hope',desc:'',images:['hope.webp','art 9.webp']},
+  style:{type:'Illustration',title:'Style Study',desc:'',images:['illust.webp','illust 3.webp']},
+  pulp:{type:'Illustration',title:'Pulp Fiction',desc:'',images:['art 2.webp']},
+  apparel:{type:'Apparel Design',title:'Apparel Design',desc:'',images:['art4.webp','aparrel.webp']},
+  secrets:{type:'Graphic Design',title:'Secrets Poster',desc:'',images:['graphic design.webp']}
+};
+function openProjectLb(key){
+  const p=projects[key];
+  document.getElementById('lb-type').textContent=p.type;
+  document.getElementById('lb-title').textContent=p.title;
+  const semEl=document.getElementById('lb-semester');semEl.textContent=p.semester||'';semEl.style.display=p.semester?'block':'none';
+  const tagEl=document.getElementById('lb-tagline');tagEl.textContent=p.tagline||'';tagEl.style.display=p.tagline?'block':'none';
+  document.getElementById('lb-desc').innerHTML=p.desc;
+  document.getElementById('lb-images').innerHTML=p.images.map(s=>`<img src="${s}" alt="${p.title}" onclick="openZoom(this)">`).join('');
+  document.getElementById('proj-lb').classList.add('open');
+  document.getElementById('proj-lb').scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+function closeProjLb(){document.getElementById('proj-lb').classList.remove('open');document.body.style.overflow='';}
+
+const shopItems={
+  rue:{title:'Rue',img:'art 3.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  ego:{title:'Ego Phantom',img:'art 0.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  hingenough:{title:'Have I Not Given Enough',img:'art 10.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  family:{title:'Family',img:'art 13.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  sanguine:{title:'Sanguine',img:'2024_3.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  growingpains:{title:'Growing Pains',img:'art11.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  robin:{title:'Robin',img:'art 14.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  hope:{title:'Hope',img:'hope.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  style:{title:'Style Study',img:'illust.webp',desc:'<p>Illustration print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  pulp:{title:'Pulp Fiction',img:'art 2.webp',desc:'<p>Illustration print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  apparel:{title:'Apparel Design',img:'art4.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
+  secrets:{title:'Secrets Poster',img:'graphic design.webp',desc:'<p>Graphic design print.</p><p>Fine art print on archival paper.</p>',price:'$25'}
+};
+function openShopLb(key){
+  const s=shopItems[key];
+  document.getElementById('shop-lb-img').src=s.img;
+  document.getElementById('shop-lb-title').textContent=s.title;
+  document.getElementById('shop-lb-desc').innerHTML=s.desc;
+  document.getElementById('shop-lb-price').textContent=s.price;
+  document.getElementById('shop-lb-buy').onclick=()=>window.location=`mailto:inniesia@gmail.com?subject=Print Inquiry — ${s.title}&body=Hi Sylvia, I'm interested in purchasing a print of ${s.title}. Please let me know the details.`;
+  const others=Object.entries(shopItems).filter(([k])=>k!==key);
+  const shuffled=others.sort(()=>Math.random()-.5).slice(0,4);
+  document.getElementById('shop-also-grid').innerHTML=shuffled.map(([k,v])=>`<div class="shop-item" onclick="openShopLb('${k}')"><img src="${v.img}" alt="${v.title}"><div class="shop-item-title">${v.title}</div><div class="shop-item-price">${v.price}</div></div>`).join('');
+  document.getElementById('shop-detail').classList.add('open');
+  document.getElementById('shop-main').style.display='none';
+  document.getElementById('page-shop').scrollTop=0;
+  window.scrollTo(0,0);
+}
+function closeShopLb(){
+  document.getElementById('shop-detail').classList.remove('open');
+  document.getElementById('shop-main').style.display='';
+}
+let zoomImages=[],zoomIndex=0;
+const zLb=()=>document.getElementById('zoom-lb');
+const zImg=()=>document.getElementById('zoom-img');
+function openZoom(img){
+  const imgs=Array.from(document.getElementById('lb-images').querySelectorAll('img'));
+  zoomImages=imgs.map(i=>i.src);zoomIndex=imgs.indexOf(img);
+  zImg().src=zoomImages[zoomIndex];
+  zLb().classList.add('open');
+}
+function zoomNav(dir){
+  zoomIndex=(zoomIndex+dir+zoomImages.length)%zoomImages.length;
+  zImg().src=zoomImages[zoomIndex];
+}
+function closeZoom(){zLb().classList.remove('open');}
+zLb().addEventListener('click',e=>{if(e.target===zLb()||e.target===zImg())closeZoom();});
+document.getElementById('proj-lb').addEventListener('click',function(e){if(e.target===this)closeProjLb()});
+
+function filterBlog(cat,btn){
+  document.querySelectorAll('.blog-cat').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('blog-featured').style.display=(cat==='all'||cat==='arch')?'grid':'none';
+  document.querySelectorAll('.blog-card').forEach(c=>{c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none'});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+originals_backup/
+node_modules/
+compress.js
+cleanup.js
+package.json
+package-lock.json
