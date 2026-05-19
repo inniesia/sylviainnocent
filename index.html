@@ -73,6 +73,11 @@ nav.stuck .nav-cta{border-color:rgba(0,0,0,.15)!important;color:#1a5fa0!importan
 .hero-bio{display:none}
 .hero-actions{display:none}
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.3);animation:fi 1s 1.4s both;z-index:3}
+.hero-bottom-nav{position:absolute;bottom:2.2rem;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:0 4rem;animation:fi 1s 1.2s both}
+.hero-bottom-nav button{font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.18em;font-weight:600;text-transform:uppercase;background:none;border:none;color:rgba(255,255,255,.45);transition:color .25s;padding:0;cursor:none}
+.hero-bottom-nav button:hover{color:#fff}
+.hero-bottom-nav-mid{display:flex;align-items:center;gap:1.2rem}
+.hero-bottom-nav-sep{width:1px;height:10px;background:rgba(255,255,255,.25)}
 .scroll-bar{width:1px;height:50px;background:rgba(255,255,255,.35);animation:pulse 2.2s infinite}
 
 .hw{padding:4rem 4rem 5rem}
@@ -482,29 +487,25 @@ body.dark .shop-detail-back:hover{color:#e8e8e8}
         <button class="btn btn-white" onclick="goTo('contact')">Get in Touch</button>
       </div>
     </div>
-    <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
+    <nav class="hero-bottom-nav">
+      <button onclick="goTo('about')">About</button>
+      <div class="hero-bottom-nav-mid">
+        <button onclick="goToWork()">Work</button>
+        <span class="hero-bottom-nav-sep"></span>
+        <button onclick="goTo('shop')">Shop</button>
+      </div>
+      <button onclick="goTo('contact')">Contact</button>
+    </nav>
   </div>
 
   <div class="proj-index">
     <div class="proj-index-list">
       <button class="proj-index-item" data-preview="arch 3.webp" onclick="openProjectLb('lagos')">Resilient Lagos</button>
-      <button class="proj-index-item" data-preview="art 3.webp" onclick="openProjectLb('rue')">Rue</button>
-      <button class="proj-index-item" data-preview="Innocent_4.webp" onclick="openProjectLb('algae')">Algae Oasis</button>
       <button class="proj-index-item" data-preview="art 0.webp" onclick="openProjectLb('ego')">Ego Phantom</button>
-      <button class="proj-index-item" data-preview="atrium 3.webp" onclick="openProjectLb('strata')">Strata</button>
-      <button class="proj-index-item" data-preview="art 10.webp" onclick="openProjectLb('hingenough')">Have I Not Given Enough</button>
-      <button class="proj-index-item" data-preview="arch 4.webp" onclick="openProjectLb('morgante')">Morgante Wilson</button>
+      <button class="proj-index-item" data-preview="Innocent_4.webp" onclick="openProjectLb('algae')">Algae Oasis</button>
       <button class="proj-index-item" data-preview="2024_3.webp" onclick="openProjectLb('sanguine')">Sanguine</button>
       <button class="proj-index-item" data-preview="Living Room 1.webp" onclick="openProjectLb('havenly')">Havenly</button>
-      <button class="proj-index-item" data-preview="art11.webp" onclick="openProjectLb('growingpains')">Growing Pains</button>
       <button class="proj-index-item" data-preview="illust.webp" onclick="openProjectLb('style')">Style Study</button>
-      <button class="proj-index-item" data-preview="art 14.webp" onclick="openProjectLb('robin')">Robin</button>
-      <button class="proj-index-item" data-preview="art 13.webp" onclick="openProjectLb('family')">Family</button>
-      <button class="proj-index-item" data-preview="art 2.webp" onclick="openProjectLb('pulp')">Pulp Fiction</button>
-      <button class="proj-index-item" data-preview="art4.webp" onclick="openProjectLb('apparel')">Apparel Design</button>
-      <button class="proj-index-item" data-preview="hope.webp" onclick="openProjectLb('hope')">Hope</button>
-      <button class="proj-index-item" data-preview="graphic design.webp" onclick="openProjectLb('secrets')">Secrets Poster</button>
-      <button class="proj-index-item" data-preview="arch3.webp" onclick="openProjectLb('saic')">Graduate Studio</button>
     </div>
   </div>
   <footer>
