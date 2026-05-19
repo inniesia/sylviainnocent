@@ -74,10 +74,12 @@ nav.stuck .nav-cta{border-color:rgba(0,0,0,.15)!important;color:#1a5fa0!importan
 .hero-actions{display:none}
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.3);animation:fi 1s 1.4s both;z-index:3}
 .hero-bottom-nav{position:absolute;bottom:2.2rem;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:0 4rem;animation:fi 1s 1.2s both}
-.hero-bottom-nav button{font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.18em;font-weight:600;text-transform:uppercase;background:none;border:none;color:rgba(255,255,255,.45);transition:color .25s;padding:0;cursor:none}
+.hero-bottom-nav button{font-family:'Cormorant Unicase',serif;font-size:clamp(.85rem,1.2vw,1.1rem);font-weight:300;letter-spacing:.06em;background:none;border:none;color:rgba(255,255,255,.45);transition:color .25s;padding:0;cursor:none}
 .hero-bottom-nav button:hover{color:#fff}
-.hero-bottom-nav-mid{display:flex;align-items:center;gap:1.2rem}
-.hero-bottom-nav-sep{width:1px;height:10px;background:rgba(255,255,255,.25)}
+.proj-hero-list{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.6rem;margin-top:2.8rem;max-width:700px}
+.proj-hero-list .proj-index-item{font-size:clamp(.8rem,1.4vw,1.1rem);color:rgba(255,255,255,.5);letter-spacing:.04em}
+.proj-hero-list .proj-index-item:hover{color:#fff}
+nav.on-hero .nav-links{opacity:0;pointer-events:none}
 .scroll-bar{width:1px;height:50px;background:rgba(255,255,255,.35);animation:pulse 2.2s infinite}
 
 .hw{padding:4rem 4rem 5rem}
@@ -476,38 +478,23 @@ body.dark .shop-detail-back:hover{color:#e8e8e8}
     <div class="hero-overlay hero-ov-art"  id="ov-art" style="opacity:0"></div>
     <div class="hero-inner">
       <h1 class="hero-name">Sylvia<span class="hero-name-last">Innocent</span></h1>
-      <div class="hero-toggle">
-        <button class="htab htab-arch active" id="htab-arch" onmouseenter="switchHero('arch')" onclick="switchHero('arch')">Designer</button>
-        <span class="hero-toggle-sep"></span>
-        <button class="htab htab-art" id="htab-art" onmouseenter="switchHero('art')" onclick="switchHero('art')">Artist</button>
-      </div>
-      <p class="hero-bio">Crafting experiential spaces that blur the line between architecture and atmosphere, and illustrating the worlds in between.</p>
-      <div class="hero-actions">
-        <button class="btn btn-blue"  onclick="goToWork()">View Work</button>
-        <button class="btn btn-white" onclick="goTo('contact')">Get in Touch</button>
+      <div class="proj-hero-list">
+        <button class="proj-index-item" data-preview="arch 3.webp" onclick="openProjectLb('lagos')">Resilient Lagos</button>
+        <button class="proj-index-item" data-preview="art 0.webp" onclick="openProjectLb('ego')">Ego Phantom</button>
+        <button class="proj-index-item" data-preview="Innocent_4.webp" onclick="openProjectLb('algae')">Algae Oasis</button>
+        <button class="proj-index-item" data-preview="2024_3.webp" onclick="openProjectLb('sanguine')">Sanguine</button>
+        <button class="proj-index-item" data-preview="Living Room 1.webp" onclick="openProjectLb('havenly')">Havenly</button>
+        <button class="proj-index-item" data-preview="illust.webp" onclick="openProjectLb('style')">Style Study</button>
       </div>
     </div>
     <nav class="hero-bottom-nav">
       <button onclick="goTo('about')">About</button>
-      <div class="hero-bottom-nav-mid">
-        <button onclick="goToWork()">Work</button>
-        <span class="hero-bottom-nav-sep"></span>
-        <button onclick="goTo('shop')">Shop</button>
-      </div>
+      <button onclick="goToWork()">Work</button>
+      <button onclick="goTo('shop')">Shop</button>
       <button onclick="goTo('contact')">Contact</button>
     </nav>
   </div>
 
-  <div class="proj-index">
-    <div class="proj-index-list">
-      <button class="proj-index-item" data-preview="arch 3.webp" onclick="openProjectLb('lagos')">Resilient Lagos</button>
-      <button class="proj-index-item" data-preview="art 0.webp" onclick="openProjectLb('ego')">Ego Phantom</button>
-      <button class="proj-index-item" data-preview="Innocent_4.webp" onclick="openProjectLb('algae')">Algae Oasis</button>
-      <button class="proj-index-item" data-preview="2024_3.webp" onclick="openProjectLb('sanguine')">Sanguine</button>
-      <button class="proj-index-item" data-preview="Living Room 1.webp" onclick="openProjectLb('havenly')">Havenly</button>
-      <button class="proj-index-item" data-preview="illust.webp" onclick="openProjectLb('style')">Style Study</button>
-    </div>
-  </div>
   <footer>
     <span class="footer-name">Sylvia Innocent</span>
     <div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a></div>
