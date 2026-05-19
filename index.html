@@ -53,7 +53,7 @@ nav.stuck .nav-cta{border-color:rgba(0,0,0,.15)!important;color:#1a5fa0!importan
 .btn-white{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
 .btn-white:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 
-.hero{position:relative;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:opacity 1s ease;pointer-events:none}
 .hero-bg-arch{z-index:0;opacity:1;background-color:#0d0105;background-image:url('EXHIBIT EXT RENDERED final plssssss.webp')}
 .hero-bg-art{z-index:1;opacity:0;background-color:#0d0105;background-image:url('hero-art.webp')}
@@ -73,13 +73,6 @@ nav.stuck .nav-cta{border-color:rgba(0,0,0,.15)!important;color:#1a5fa0!importan
 .hero-bio{display:none}
 .hero-actions{display:none}
 .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.3);animation:fi 1s 1.4s both;z-index:3}
-.hero-bottom-nav{position:absolute;bottom:2.2rem;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:0 4rem;animation:fi 1s 1.2s both}
-.hero-bottom-nav button{font-family:'Cormorant Unicase',serif;font-size:clamp(.85rem,1.2vw,1.1rem);font-weight:600;letter-spacing:.06em;background:none;border:none;color:rgba(255,255,255,.6);transition:color .25s;padding:0;cursor:none}
-.hero-bottom-nav button:hover{color:#fff}
-.proj-hero-list{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.6rem;margin-top:2.8rem;max-width:700px}
-.proj-hero-list .proj-index-item{font-size:clamp(.8rem,1.4vw,1.1rem);color:rgba(255,255,255,.5);letter-spacing:.04em}
-.proj-hero-list .proj-index-item:hover{color:#fff}
-nav.on-hero .nav-links{opacity:0;pointer-events:none}
 .scroll-bar{width:1px;height:50px;background:rgba(255,255,255,.35);animation:pulse 2.2s infinite}
 
 .hw{padding:4rem 4rem 5rem}
@@ -296,16 +289,6 @@ footer{padding:2.2rem 4rem;display:flex;justify-content:space-between;align-item
 .shop-item-buy{font-size:.48rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#1a5fa0;background:none;border:none;border-bottom:1px solid transparent;padding:0 0 2px;transition:border-color .2s;cursor:none}
 .shop-item-buy:hover{border-bottom-color:#1a5fa0}
 
-.proj-index{padding:5rem 4rem 7rem;text-align:center}
-.proj-index-list{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:.6rem 2rem;max-width:960px;margin:0 auto}
-.proj-index-item{font-family:'Cormorant Unicase',serif;font-size:clamp(1.4rem,2.8vw,2.2rem);font-weight:300;letter-spacing:.01em;color:#1a1a1a;background:none;border:none;cursor:none;transition:color .2s;padding:0;line-height:1.6}
-.proj-index-item:hover{color:#a01e35}
-body.dark .proj-index-item{color:rgba(255,255,255,.85)}
-body.dark .proj-index-item:hover{color:#a01e35}
-#proj-cursor-prev{position:fixed;pointer-events:none;z-index:899;width:260px;overflow:hidden;opacity:0;transition:opacity .15s ease;top:0;left:0;transform:translate(0,-50%)}
-#proj-cursor-prev.show{opacity:1}
-#proj-cursor-prev img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block}
-
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes fi{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
@@ -398,9 +381,6 @@ nav.menu-open .nav-logo{opacity:0;pointer-events:none}
 
   footer{flex-direction:column;gap:.8rem;text-align:center;padding:1.5rem}
   .footer-links{justify-content:center}
-  #proj-cursor-prev{display:none}
-  .proj-index{padding:3rem 1.5rem 5rem}
-  .proj-index-item{font-size:clamp(1.1rem,6vw,1.6rem)}
 }
 
 /* Dark mode toggle button */
@@ -478,33 +458,21 @@ body.dark .shop-detail-back:hover{color:#e8e8e8}
     <div class="hero-overlay hero-ov-art"  id="ov-art" style="opacity:0"></div>
     <div class="hero-inner">
       <h1 class="hero-name">Sylvia<span class="hero-name-last">Innocent</span></h1>
-      <div class="proj-hero-list">
-        <button class="proj-index-item" data-preview="arch 3.webp" onclick="openProjectLb('lagos')">Resilient Lagos</button>
-        <button class="proj-index-item" data-preview="art 0.webp" onclick="openProjectLb('ego')">Ego Phantom</button>
-        <button class="proj-index-item" data-preview="Innocent_4.webp" onclick="openProjectLb('algae')">Algae Oasis</button>
-        <button class="proj-index-item" data-preview="2024_3.webp" onclick="openProjectLb('sanguine')">Sanguine</button>
-        <button class="proj-index-item" data-preview="Living Room 1.webp" onclick="openProjectLb('havenly')">Havenly</button>
-        <button class="proj-index-item" data-preview="illust.webp" onclick="openProjectLb('style')">Style Study</button>
+      <div class="hero-toggle">
+        <button class="htab htab-arch active" id="htab-arch" onmouseenter="switchHero('arch')" onclick="switchHero('arch')">Designer</button>
+        <span class="hero-toggle-sep"></span>
+        <button class="htab htab-art" id="htab-art" onmouseenter="switchHero('art')" onclick="switchHero('art')">Artist</button>
+      </div>
+      <p class="hero-bio">Crafting experiential spaces that blur the line between architecture and atmosphere, and illustrating the worlds in between.</p>
+      <div class="hero-actions">
+        <button class="btn btn-blue"  onclick="goToWork()">View Work</button>
+        <button class="btn btn-white" onclick="goTo('contact')">Get in Touch</button>
       </div>
     </div>
-    <nav class="hero-bottom-nav">
-      <button onclick="goTo('about')">About</button>
-      <button onclick="goToWork()">Work</button>
-      <button onclick="goTo('shop')">Shop</button>
-      <button onclick="goTo('contact')">Contact</button>
-    </nav>
+    <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
   </div>
 
-  <footer>
-    <span class="footer-name">Sylvia Innocent</span>
-    <div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a></div>
-    <span class="footer-cr">© 2026 Sylvia Innocent</span>
-  </footer>
-</div>
-
-<!-- WORK -->
-<div class="page" id="page-work">
-  <div class="hw hw-arch" id="hw-section" style="padding-top:7rem">
+  <div class="hw hw-arch" id="hw-section">
     <div class="hw-head">
       <div class="tab-row">
         <button class="tab-btn tab-arch" id="ht-arch" onclick="homeTab('arch')">Design</button>
@@ -556,7 +524,11 @@ body.dark .shop-detail-back:hover{color:#e8e8e8}
     </div>
     </div>
   </div>
-  <footer><span class="footer-name">Sylvia Innocent</span><div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a></div><span class="footer-cr">© 2026 Sylvia Innocent</span></footer>
+  <footer>
+    <span class="footer-name">Sylvia Innocent</span>
+    <div class="footer-links"><a href="mailto:inniesia@gmail.com">Email</a><a href="https://linkedin.com/in/sylvia-innocent" target="_blank">LinkedIn</a></div>
+    <span class="footer-cr">© 2026 Sylvia Innocent</span>
+  </footer>
 </div>
 
 <!-- ABOUT -->
@@ -763,7 +735,6 @@ body.dark .shop-detail-back:hover{color:#e8e8e8}
 </div>
 
 
-<div id="proj-cursor-prev"><img src="" alt="preview"></div>
 <div id="zoom-lb">
   <button class="zoom-nav zoom-prev" onclick="zoomNav(-1)">&#8592;</button>
   <img id="zoom-img" src="">
@@ -809,26 +780,7 @@ function toggleTheme(){
 })();
 
 const cursor=document.getElementById('cursor');
-const pcp=document.getElementById('proj-cursor-prev');
-const pcpImg=pcp.querySelector('img');
-let pcpOn=false,mouseX=0,mouseY=0;
-document.addEventListener('mousemove',e=>{
-  mouseX=e.clientX;mouseY=e.clientY;
-  cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
-  if(pcpOn){
-    pcp.style.left=Math.min(e.clientX+28,window.innerWidth-290)+'px';
-    pcp.style.top=e.clientY+'px';
-  }
-});
-document.querySelectorAll('.proj-index-item').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{
-    pcpImg.src=el.dataset.preview;
-    pcp.style.left=Math.min(mouseX+28,window.innerWidth-290)+'px';
-    pcp.style.top=mouseY+'px';
-    pcp.classList.add('show');pcpOn=true;
-  });
-  el.addEventListener('mouseleave',()=>{pcp.classList.remove('show');pcpOn=false;});
-});
+document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
 document.querySelectorAll('a,button,.img-cell,.proj-card,.blog-card,.featured,.zoom-nav,#zoom-img').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
@@ -864,16 +816,23 @@ function _showPage(p){
   nav.classList.remove('stuck');
   nav.classList.toggle('on-hero',p==='home');
 }
-function _showWork(){_showPage('work');}
+function _showWork(){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nl-work').classList.add('active');
+  closeMobileNav();
+  setTimeout(()=>document.getElementById('hw-section').scrollIntoView({behavior:'smooth'}),50);
+}
 function goTo(p){_showPage(p);history.pushState({page:p},'',p==='home'?'/':'/'+p);}
 
 window.addEventListener('popstate',e=>{
   const p=(e.state&&e.state.page)||'home';
-  _showPage(p);
+  if(p==='work')_showWork();else _showPage(p);
 });
 (function(){
   const path=location.pathname.replace(/^\//,'').replace(/\/$/,'')||'home';
-  if(path==='work'){_showPage('work');history.replaceState({page:'work'},'','/work');}
+  if(path==='work'){_showWork();history.replaceState({page:'work'},'','/work');}
   else if(document.getElementById('page-'+path)){_showPage(path);history.replaceState({page:path},'',path==='home'?'/':'/'+path);}
 })();
 
@@ -897,7 +856,7 @@ function homeTab(t){
   document.getElementById('hg-art').classList.toggle('show',t==='art');
 }
 
-function goToWork(){goTo('work');}
+function goToWork(){_showWork();history.pushState({page:'work'},'','/work');}
 
 const projects={
   lagos:{type:'Academic — SAIC MArch',title:'Resilient Lagos',semester:'MArch Thesis; Spring 2025',tagline:'Coastal living: resilient spaces for a seasonal landscape',desc:'Lagos, one of Africa\'s most populous and culturally vibrant cities, is shaped by dynamic cycles of growth, migration, and celebration. Each December, the city experiences a dramatic surge in tourism that fuels its hospitality and nightlife sectors. Yet when the season ends, these same spaces often fall into periods of disuse, revealing a disconnect between short-term tourism infrastructure and long-term community needs. The retreat shifts between two main configurations. This modular approach allows the site to stay active and relevant throughout the year.<br><br>Tools used: Revit, Rhino 3D, Enscape, Adobe Photoshop, Adobe Illustrator',images:['arch 3.webp','thesis 1.webp','Neighborhood Map/f4f32116-1.webp','Site Context and Character/0c874e49-1.webp','Programming Landscape/de422eb7-1.webp','thesis 2.webp','Coastal Landscape/ab6a587a-1.webp','Flood Risk and Concept/e44fd20a-1.webp','Site Plan wo text/fa1a7a22-1.webp','thesis 3.png','AXON FINAL/9baed760-1.webp','art studio.webp','bedroom.webp','courtyard.webp','Ext 5.webp','ext 8.webp','int 1_1.webp','int 3.webp']},
