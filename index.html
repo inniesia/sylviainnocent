@@ -834,9 +834,8 @@ window.addEventListener('popstate',e=>{
 });
 (function(){
   const path=location.pathname.replace(/^\//,'').replace(/\/$/,'')||'home';
-  const hash=location.hash.slice(1);
-  if(path==='work'){_showWork();history.replaceState({page:'work',lb:hash||undefined},'','/work'+(hash?'#'+hash:''));}
-  else if(document.getElementById('page-'+path)){_showPage(path);history.replaceState({page:path,lb:hash||undefined},'',path==='home'?'/':'/'+path+(hash?'#'+hash:''));}
+  if(path==='work'){_showWork();history.replaceState({page:'work'},'','/work');}
+  else if(document.getElementById('page-'+path)){_showPage(path);history.replaceState({page:path},'',path==='home'?'/':'/'+path);}
 })();
 
 function switchHero(mode){
@@ -896,7 +895,7 @@ function _renderProjectLb(key){
 }
 function openProjectLb(key){
   const pg=(history.state&&history.state.page)||'home';
-  history.pushState({page:pg,lb:key},'',(pg==='home'?'/':'/'+pg)+'#'+key);
+  history.pushState({page:pg,lb:key},'','/'+key);
   _lbFromNav=true;_renderProjectLb(key);
 }
 function closeProjLb(){
@@ -905,7 +904,7 @@ function closeProjLb(){
   if(_lbFromNav){_lbFromNav=false;history.back();}
   else{const pg=(history.state&&history.state.page)||'home';history.replaceState({page:pg},'',pg==='home'?'/':'/'+pg);}
 }
-(function(){const hash=location.hash.slice(1);if(hash&&projects[hash])_renderProjectLb(hash);})();
+(function(){const key=location.pathname.replace(/^\//,'').replace(/\/$/,'');if(key&&projects[key]){_showPage('home');history.replaceState({page:'home',lb:key},'','/'+key);_renderProjectLb(key);}})();
 
 const shopItems={
   rue:{title:'Rue',img:'art 3.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
