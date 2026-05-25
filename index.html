@@ -828,12 +828,15 @@ function goTo(p){_showPage(p);history.pushState({page:p},'',p==='home'?'/':'/'+p
 
 window.addEventListener('popstate',e=>{
   const p=(e.state&&e.state.page)||'home';
-  if(p==='work')_showWork();else _showPage(p);
+  const lb=e.state&&e.state.lb;
+  if(lb&&projects[lb]){_lbFromNav=true;_renderProjectLb(lb);}
+  else{const lbEl=document.getElementById('proj-lb');if(lbEl.classList.contains('open')){lbEl.classList.remove('open');document.body.style.overflow='';_lbFromNav=false;}if(p==='work')_showWork();else _showPage(p);}
 });
 (function(){
   const path=location.pathname.replace(/^\//,'').replace(/\/$/,'')||'home';
-  if(path==='work'){_showWork();history.replaceState({page:'work'},'','/work');}
-  else if(document.getElementById('page-'+path)){_showPage(path);history.replaceState({page:path},'',path==='home'?'/':'/'+path);}
+  const hash=location.hash.slice(1);
+  if(path==='work'){_showWork();history.replaceState({page:'work',lb:hash||undefined},'','/work'+(hash?'#'+hash:''));}
+  else if(document.getElementById('page-'+path)){_showPage(path);history.replaceState({page:path,lb:hash||undefined},'',path==='home'?'/':'/'+path+(hash?'#'+hash:''));}
 })();
 
 function switchHero(mode){
@@ -878,7 +881,8 @@ const projects={
   apparel:{type:'Apparel Design',title:'Apparel Design',desc:'',images:['art4.webp','aparrel.webp']},
   secrets:{type:'Graphic Design',title:'Secrets Poster',desc:'',images:['graphic design.webp']}
 };
-function openProjectLb(key){
+let _lbFromNav=false;
+function _renderProjectLb(key){
   const p=projects[key];
   document.getElementById('lb-type').textContent=p.type;
   document.getElementById('lb-title').textContent=p.title;
@@ -890,7 +894,18 @@ function openProjectLb(key){
   document.getElementById('proj-lb').scrollTop=0;
   document.body.style.overflow='hidden';
 }
-function closeProjLb(){document.getElementById('proj-lb').classList.remove('open');document.body.style.overflow='';}
+function openProjectLb(key){
+  const pg=(history.state&&history.state.page)||'home';
+  history.pushState({page:pg,lb:key},'',(pg==='home'?'/':'/'+pg)+'#'+key);
+  _lbFromNav=true;_renderProjectLb(key);
+}
+function closeProjLb(){
+  document.getElementById('proj-lb').classList.remove('open');
+  document.body.style.overflow='';
+  if(_lbFromNav){_lbFromNav=false;history.back();}
+  else{const pg=(history.state&&history.state.page)||'home';history.replaceState({page:pg},'',pg==='home'?'/':'/'+pg);}
+}
+(function(){const hash=location.hash.slice(1);if(hash&&projects[hash])_renderProjectLb(hash);})();
 
 const shopItems={
   rue:{title:'Rue',img:'art 3.webp',desc:'<p>Digital art print.</p><p>Fine art print on archival paper.</p>',price:'$25'},
