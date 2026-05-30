@@ -64,8 +64,8 @@ nav.stuck .nav-cta{border-color:rgba(0,0,0,.15)!important;color:#1a5fa0!importan
 .hero-name{font-family:'Cormorant Unicase',serif;font-size:clamp(4rem,12vw,11rem);font-weight:300;line-height:.95;letter-spacing:.04em;color:#fff;animation:up .9s .2s both;text-shadow:0 2px 60px rgba(0,0,0,.3)}
 .hero-name-last{display:block;color:#fff;font-style:normal}
 .hero-toggle{display:flex;align-items:center;gap:.9rem;margin:2.2rem 0 0;animation:up .8s .45s both}
-.hero-toggle-sep{width:1px;height:11px;background:rgba(255,255,255,.3)}
-.htab{padding:0;font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.2em;font-weight:500;text-transform:uppercase;background:transparent;border:none;border-bottom:none;transition:color .35s;color:rgba(255,255,255,.4)}
+.hero-toggle-sep{width:1px;height:11px;background:rgba(255,255,255,.3);flex-shrink:0;align-self:center}
+.htab{padding:0;margin:0;font-family:'Inter',sans-serif;font-size:.5rem;letter-spacing:.2em;font-weight:500;text-transform:uppercase;background:transparent;border:none;outline:none;-webkit-appearance:none;appearance:none;line-height:1;transition:color .35s;color:rgba(255,255,255,.4)}
 .htab-arch{color:rgba(255,255,255,.4)}
 .htab-art{color:rgba(255,255,255,.4)}
 .htab-arch.active,.htab-arch:hover{color:#fff}
@@ -288,6 +288,25 @@ footer{padding:2.2rem 4rem;display:flex;justify-content:space-between;align-item
 .shop-item-price{font-family:'Inter',sans-serif;font-size:.75rem;color:#8a8898;margin-bottom:.4rem}
 .shop-item-buy{font-size:.48rem;letter-spacing:.07em;font-weight:700;text-transform:uppercase;color:#1a5fa0;background:none;border:none;border-bottom:1px solid transparent;padding:0 0 2px;transition:border-color .2s;cursor:none}
 .shop-item-buy:hover{border-bottom-color:#1a5fa0}
+.shop-tabs{display:flex;gap:2.5rem;border-bottom:1px solid rgba(0,0,0,.08);margin-bottom:3rem}
+.shop-tab{font-family:'Inter',sans-serif;font-size:.48rem;letter-spacing:.14em;font-weight:700;text-transform:uppercase;color:#8a8898;background:none;border:none;border-bottom:2px solid transparent;padding:0 0 .85rem;cursor:none;transition:color .2s,border-color .2s;margin-bottom:-1px;-webkit-appearance:none;appearance:none}
+.shop-tab:hover{color:#1a1a1a}
+.shop-tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a}
+.svc-intro{font-family:'Inter',sans-serif;font-size:.82rem;color:#8a8898;line-height:1.9;max-width:500px;margin-bottom:3rem}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(0,0,0,.08)}
+.svc-card{padding:2.5rem 2rem 3rem;border-right:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column}
+.svc-card:last-child{border-right:none}
+.svc-tier{font-family:'Inter',sans-serif;font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:#1a5fa0;margin-bottom:1.5rem}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;letter-spacing:.02em;margin-bottom:.4rem;color:#1a1a1a}
+.svc-tagline{font-family:'Inter',sans-serif;font-size:.78rem;color:#8a8898;line-height:1.7;margin-bottom:2rem}
+.svc-rule{border:none;border-top:1px solid rgba(0,0,0,.08);margin-bottom:1.75rem}
+.svc-features{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem;flex:1}
+.svc-feature{display:flex;align-items:flex-start;gap:.6rem;font-family:'Inter',sans-serif;font-size:.78rem;color:#8a8898;line-height:1.6}
+.svc-feature::before{content:'—';color:#1a5fa0;flex-shrink:0}
+.svc-note{font-family:'Inter',sans-serif;font-size:.7rem;color:#bbb;letter-spacing:.04em;margin-bottom:1.5rem;font-style:italic}
+.svc-cta{font-family:'Inter',sans-serif;font-size:.48rem;letter-spacing:.1em;font-weight:700;text-transform:uppercase;color:#1a5fa0;background:none;border:none;border-bottom:1px solid #1a5fa0;padding:0 0 2px;cursor:none;text-decoration:none;transition:opacity .2s;align-self:flex-start}
+.svc-cta:hover{opacity:.6}
+.svc-bottom-note{border-top:1px solid rgba(0,0,0,.08);padding:3rem 0;font-family:'Inter',sans-serif;font-size:.82rem;color:#8a8898;line-height:1.9;max-width:520px}
 
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes fi{from{opacity:0}to{opacity:1}}
@@ -357,6 +376,9 @@ nav.menu-open .nav-logo{opacity:0;pointer-events:none}
   .shop-layout{grid-template-columns:1fr;gap:2rem}
   .shop-sidebar{position:static}
   .shop-grid{columns:2;column-gap:1.2rem}
+  .svc-grid{grid-template-columns:1fr}
+  .svc-card{border-right:none;border-bottom:1px solid rgba(0,0,0,.08)}
+  .svc-card:last-child{border-bottom:none}
   .shop-detail-top{flex-direction:column;gap:2rem}
   .shop-detail-img{max-width:100%}
   .shop-also-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
@@ -420,6 +442,15 @@ body.dark .shop-detail-title,body.dark .shop-detail-price{color:#e8e8e8}
 body.dark .shop-detail-desc{color:rgba(255,255,255,.6)}
 body.dark .shop-item-title{color:#e8e8e8}
 body.dark .shop-detail-back:hover{color:#e8e8e8}
+body.dark .shop-tab{color:rgba(255,255,255,.35)}
+body.dark .shop-tab:hover{color:#e8e8e8}
+body.dark .shop-tab.active{color:#e8e8e8;border-bottom-color:#e8e8e8}
+body.dark .shop-tabs{border-bottom-color:rgba(255,255,255,.08)}
+body.dark .svc-name{color:#e8e8e8}
+body.dark .svc-grid{border-color:rgba(255,255,255,.08)}
+body.dark .svc-card{border-right-color:rgba(255,255,255,.08)}
+body.dark .svc-rule{border-top-color:rgba(255,255,255,.08)}
+body.dark .svc-bottom-note{border-top-color:rgba(255,255,255,.08)}
 </style>
 </head>
 <body>
@@ -641,28 +672,85 @@ body.dark .shop-detail-back:hover{color:#e8e8e8}
         <div class="shop-also-grid" id="shop-also-grid"></div>
       </div>
       <div id="shop-main">
-      <div class="shop-layout">
-        <div class="shop-sidebar">
-          <div class="shop-sidebar-text">
-            <p>Original digital artwork available as fine art prints, printed on archival paper.</p>
-            <p>$25 each. Inquire to order — I'll get back to you within 48 hours.</p>
+        <div class="shop-tabs">
+          <button class="shop-tab active" id="tab-prints" onclick="switchShopTab('prints')">Prints</button>
+          <button class="shop-tab" id="tab-services" onclick="switchShopTab('services')">Services</button>
+        </div>
+        <div id="shop-prints">
+          <div class="shop-layout">
+            <div class="shop-sidebar">
+              <div class="shop-sidebar-text">
+                <p>Original digital artwork available as fine art prints, printed on archival paper.</p>
+                <p>$25 each. Inquire to order — I'll get back to you within 48 hours.</p>
+              </div>
+            </div>
+            <div class="shop-grid">
+              <div class="shop-item" onclick="openShopLb('rue')"><img src="art 3.webp" alt="Rue"><div class="shop-item-title">Rue</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('ego')"><img src="art 0.webp" alt="Ego Phantom"><div class="shop-item-title">Ego Phantom</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('hingenough')"><img src="art 10.webp" alt="Have I Not Given Enough"><div class="shop-item-title">Have I Not Given Enough</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('family')"><img src="art 13.webp" alt="Family"><div class="shop-item-title">Family</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('sanguine')"><img src="2024_3.webp" alt="Sanguine"><div class="shop-item-title">Sanguine</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('growingpains')"><img src="art11.webp" alt="Growing Pains"><div class="shop-item-title">Growing Pains</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('robin')"><img src="art 14.webp" alt="Robin"><div class="shop-item-title">Robin</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('hope')"><img src="hope.webp" alt="Hope"><div class="shop-item-title">Hope</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('style')"><img src="illust.webp" alt="Style Study"><div class="shop-item-title">Style Study</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('pulp')"><img src="art 2.webp" alt="Pulp Fiction"><div class="shop-item-title">Pulp Fiction</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('apparel')"><img src="art4.webp" alt="Apparel Design"><div class="shop-item-title">Apparel Design</div><div class="shop-item-price">$25</div></div>
+              <div class="shop-item" onclick="openShopLb('secrets')"><img src="graphic design.webp" alt="Secrets Poster"><div class="shop-item-title">Secrets Poster</div><div class="shop-item-price">$25</div></div>
+            </div>
           </div>
         </div>
-        <div class="shop-grid">
-          <div class="shop-item" onclick="openShopLb('rue')"><img src="art 3.webp" alt="Rue"><div class="shop-item-title">Rue</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('ego')"><img src="art 0.webp" alt="Ego Phantom"><div class="shop-item-title">Ego Phantom</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('hingenough')"><img src="art 10.webp" alt="Have I Not Given Enough"><div class="shop-item-title">Have I Not Given Enough</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('family')"><img src="art 13.webp" alt="Family"><div class="shop-item-title">Family</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('sanguine')"><img src="2024_3.webp" alt="Sanguine"><div class="shop-item-title">Sanguine</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('growingpains')"><img src="art11.webp" alt="Growing Pains"><div class="shop-item-title">Growing Pains</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('robin')"><img src="art 14.webp" alt="Robin"><div class="shop-item-title">Robin</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('hope')"><img src="hope.webp" alt="Hope"><div class="shop-item-title">Hope</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('style')"><img src="illust.webp" alt="Style Study"><div class="shop-item-title">Style Study</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('pulp')"><img src="art 2.webp" alt="Pulp Fiction"><div class="shop-item-title">Pulp Fiction</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('apparel')"><img src="art4.webp" alt="Apparel Design"><div class="shop-item-title">Apparel Design</div><div class="shop-item-price">$25</div></div>
-          <div class="shop-item" onclick="openShopLb('secrets')"><img src="graphic design.webp" alt="Secrets Poster"><div class="shop-item-title">Secrets Poster</div><div class="shop-item-price">$25</div></div>
+        <div id="shop-services" style="display:none">
+          <p class="svc-intro">Architectural drafting and rendering services — from floor plans to finished presentation drawings. Available for residential and commercial projects. All packages are quote-based; I'll respond within 48 hours.</p>
+          <div class="svc-grid">
+            <div class="svc-card">
+              <div class="svc-tier">Tier 01</div>
+              <div class="svc-name">Draft</div>
+              <div class="svc-tagline">Floor plans, elevations, and basic construction drawings for smaller projects or early-stage design.</div>
+              <hr class="svc-rule">
+              <ul class="svc-features">
+                <li class="svc-feature">Floor plans (up to 2 levels)</li>
+                <li class="svc-feature">Elevations (up to 4 sides)</li>
+                <li class="svc-feature">2 revision rounds</li>
+                <li class="svc-feature">PDF delivery</li>
+              </ul>
+              <div class="svc-note">Ideal for small residential projects</div>
+              <a class="svc-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Draft%20Package">Request a Quote →</a>
+            </div>
+            <div class="svc-card">
+              <div class="svc-tier">Tier 02</div>
+              <div class="svc-name">Studio</div>
+              <div class="svc-tagline">Full drafting set plus photorealistic 3D renderings — everything you need for client presentations.</div>
+              <hr class="svc-rule">
+              <ul class="svc-features">
+                <li class="svc-feature">Everything in Draft</li>
+                <li class="svc-feature">3D exterior or interior rendering (up to 3 views)</li>
+                <li class="svc-feature">Material &amp; finish callouts</li>
+                <li class="svc-feature">3 revision rounds</li>
+                <li class="svc-feature">High-res JPEG + PDF delivery</li>
+              </ul>
+              <div class="svc-note">Most popular for residential redesigns</div>
+              <a class="svc-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Studio%20Package">Request a Quote →</a>
+            </div>
+            <div class="svc-card">
+              <div class="svc-tier">Tier 03</div>
+              <div class="svc-name">Full Set</div>
+              <div class="svc-tagline">Complete permit-ready drawing package with full rendering suite for larger or complex projects.</div>
+              <hr class="svc-rule">
+              <ul class="svc-features">
+                <li class="svc-feature">Everything in Studio</li>
+                <li class="svc-feature">Site plan &amp; section drawings</li>
+                <li class="svc-feature">Full rendering suite (up to 6 views)</li>
+                <li class="svc-feature">Construction detail sheets</li>
+                <li class="svc-feature">Unlimited revisions within scope</li>
+                <li class="svc-feature">CAD source files included</li>
+              </ul>
+              <div class="svc-note">For commercial &amp; multi-unit projects</div>
+              <a class="svc-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Full%20Set%20Package">Request a Quote →</a>
+            </div>
+          </div>
+          <p class="svc-bottom-note">Not sure which package fits your project? <a href="mailto:inniesia@gmail.com?subject=Architecture%20Services%20Inquiry" style="color:#1a5fa0;text-decoration:none;border-bottom:1px solid #1a5fa0">Send me a note</a> and I'll help figure it out — I'll send a custom quote within 48 hours.</p>
         </div>
-      </div>
       </div><!-- end shop-main -->
     </div>
   </div>
@@ -813,6 +901,13 @@ function _showPage(p){
   const nav=document.getElementById('nav');
   nav.classList.remove('stuck');
   nav.classList.toggle('on-hero',p==='home');
+  if(p==='shop')switchShopTab('prints');
+}
+function switchShopTab(tab){
+  document.getElementById('tab-prints').classList.toggle('active',tab==='prints');
+  document.getElementById('tab-services').classList.toggle('active',tab==='services');
+  document.getElementById('shop-prints').style.display=tab==='prints'?'':'none';
+  document.getElementById('shop-services').style.display=tab==='services'?'':'none';
 }
 function _showWork(){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
