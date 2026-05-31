@@ -292,21 +292,27 @@ footer{padding:2.2rem 4rem;display:flex;justify-content:space-between;align-item
 .shop-tab{font-family:'Inter',sans-serif;font-size:.48rem;letter-spacing:.14em;font-weight:700;text-transform:uppercase;color:#8a8898;background:none;border:none;border-bottom:2px solid transparent;padding:0 0 .85rem;cursor:none;transition:color .2s,border-color .2s;margin-bottom:-1px;-webkit-appearance:none;appearance:none}
 .shop-tab:hover{color:#1a1a1a}
 .shop-tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a}
-.svc-intro{font-family:'Inter',sans-serif;font-size:.82rem;color:#8a8898;line-height:1.9;max-width:500px;margin-bottom:3rem}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(0,0,0,.08)}
-.svc-card{padding:2.5rem 2rem 3rem;border-right:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column}
-.svc-card:last-child{border-right:none}
-.svc-tier{font-family:'Inter',sans-serif;font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:#1a5fa0;margin-bottom:1.5rem}
-.svc-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;letter-spacing:.02em;margin-bottom:.4rem;color:#1a1a1a}
-.svc-tagline{font-family:'Inter',sans-serif;font-size:.78rem;color:#8a8898;line-height:1.7;margin-bottom:2rem}
-.svc-rule{border:none;border-top:1px solid rgba(0,0,0,.08);margin-bottom:1.75rem}
-.svc-features{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem;flex:1}
-.svc-feature{display:flex;align-items:flex-start;gap:.6rem;font-family:'Inter',sans-serif;font-size:.78rem;color:#8a8898;line-height:1.6}
-.svc-feature::before{content:'—';color:#1a5fa0;flex-shrink:0}
-.svc-note{font-family:'Inter',sans-serif;font-size:.7rem;color:#bbb;letter-spacing:.04em;margin-bottom:1.5rem;font-style:italic}
-.svc-cta{font-family:'Inter',sans-serif;font-size:.48rem;letter-spacing:.1em;font-weight:700;text-transform:uppercase;color:#1a5fa0;background:none;border:none;border-bottom:1px solid #1a5fa0;padding:0 0 2px;cursor:none;text-decoration:none;transition:opacity .2s;align-self:flex-start}
-.svc-cta:hover{opacity:.6}
-.svc-bottom-note{border-top:1px solid rgba(0,0,0,.08);padding:3rem 0;font-family:'Inter',sans-serif;font-size:.82rem;color:#8a8898;line-height:1.9;max-width:520px}
+.svc-dark{width:100vw;position:relative;left:50%;margin-left:-50vw;box-sizing:border-box;background:#0d0d0d;padding:5rem max(4rem,calc((100vw - 1120px) / 2)) 4rem;color:#fff}
+.svc-dark-intro{font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.9;max-width:480px;margin-bottom:3rem}
+.svc-list{position:relative;border-top:1px solid rgba(255,255,255,.08)}
+.svc-row{display:flex;align-items:center;gap:2rem;padding:1.75rem 42% 1.75rem 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:none;position:relative}
+.svc-row-num{font-family:'Inter',sans-serif;font-size:.44rem;letter-spacing:.15em;color:rgba(255,255,255,.2);width:2rem;flex-shrink:0}
+.svc-row-name{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;letter-spacing:.01em;color:rgba(255,255,255,.75);flex-shrink:0;transition:color .25s;line-height:1}
+.svc-row:hover .svc-row-name{color:#fff}
+.svc-row-desc{font-family:'Inter',sans-serif;font-size:.75rem;color:rgba(255,255,255,.25);flex:1;transition:color .25s}
+.svc-row:hover .svc-row-desc{color:rgba(255,255,255,.5)}
+.svc-row-cta{font-family:'Inter',sans-serif;font-size:.44rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0);text-decoration:none;flex-shrink:0;transition:color .25s;cursor:none}
+.svc-row:hover .svc-row-cta{color:rgba(255,255,255,.6)}
+.svc-preview-panel{position:absolute;right:0;top:0;bottom:0;width:40%;background:#161616;border-left:1px solid rgba(255,255,255,.06);padding:2.5rem;display:flex;flex-direction:column;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.svc-list:hover .svc-preview-panel{opacity:1}
+.svcp-num{font-family:'Inter',sans-serif;font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:1rem}
+.svcp-name{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:#fff;margin-bottom:1.5rem;line-height:1}
+.svcp-features{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.5rem}
+.svcp-feature{font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.4);display:flex;gap:.5rem;line-height:1.5;align-items:flex-start}
+.svcp-feature::before{content:'—';color:rgba(255,255,255,.2);flex-shrink:0}
+.svcp-note{font-family:'Inter',sans-serif;font-size:.65rem;color:rgba(255,255,255,.18);letter-spacing:.04em;font-style:italic}
+.svc-dark-footer{font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.3);line-height:1.9;max-width:520px;margin-top:3rem}
+.svc-dark-footer a{color:rgba(255,255,255,.55);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
 
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes fi{from{opacity:0}to{opacity:1}}
@@ -376,9 +382,9 @@ nav.menu-open .nav-logo{opacity:0;pointer-events:none}
   .shop-layout{grid-template-columns:1fr;gap:2rem}
   .shop-sidebar{position:static}
   .shop-grid{columns:2;column-gap:1.2rem}
-  .svc-grid{grid-template-columns:1fr}
-  .svc-card{border-right:none;border-bottom:1px solid rgba(0,0,0,.08)}
-  .svc-card:last-child{border-bottom:none}
+  .svc-row{padding-right:0}
+  .svc-preview-panel{display:none}
+  .svc-row-cta{color:rgba(255,255,255,.45)!important}
   .shop-detail-top{flex-direction:column;gap:2rem}
   .shop-detail-img{max-width:100%}
   .shop-also-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
@@ -446,11 +452,6 @@ body.dark .shop-tab{color:rgba(255,255,255,.35)}
 body.dark .shop-tab:hover{color:#e8e8e8}
 body.dark .shop-tab.active{color:#e8e8e8;border-bottom-color:#e8e8e8}
 body.dark .shop-tabs{border-bottom-color:rgba(255,255,255,.08)}
-body.dark .svc-name{color:#e8e8e8}
-body.dark .svc-grid{border-color:rgba(255,255,255,.08)}
-body.dark .svc-card{border-right-color:rgba(255,255,255,.08)}
-body.dark .svc-rule{border-top-color:rgba(255,255,255,.08)}
-body.dark .svc-bottom-note{border-top-color:rgba(255,255,255,.08)}
 </style>
 </head>
 <body>
@@ -701,55 +702,41 @@ body.dark .svc-bottom-note{border-top-color:rgba(255,255,255,.08)}
           </div>
         </div>
         <div id="shop-services" style="display:none">
-          <p class="svc-intro">Architectural drafting and rendering services — from floor plans to finished presentation drawings. Available for residential and commercial projects. All packages are quote-based; I'll respond within 48 hours.</p>
-          <div class="svc-grid">
-            <div class="svc-card">
-              <div class="svc-tier">Tier 01</div>
-              <div class="svc-name">Draft</div>
-              <div class="svc-tagline">Floor plans, elevations, and basic construction drawings for smaller projects or early-stage design.</div>
-              <hr class="svc-rule">
-              <ul class="svc-features">
-                <li class="svc-feature">Floor plans (up to 2 levels)</li>
-                <li class="svc-feature">Elevations (up to 4 sides)</li>
-                <li class="svc-feature">2 revision rounds</li>
-                <li class="svc-feature">PDF delivery</li>
-              </ul>
-              <div class="svc-note">Ideal for small residential projects</div>
-              <a class="svc-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Draft%20Package">Request a Quote →</a>
+          <div class="svc-dark">
+            <p class="svc-dark-intro">Architectural drafting and rendering — from floor plans to finished presentation drawings. Quote-based; I'll respond within 48 hours.</p>
+            <div class="svc-list">
+              <div class="svc-preview-panel" id="svc-preview">
+                <div class="svcp-num" id="svcp-num">01 — Draft</div>
+                <div class="svcp-name" id="svcp-name">Draft</div>
+                <ul class="svcp-features" id="svcp-features">
+                  <li class="svcp-feature">Floor plans (up to 2 levels)</li>
+                  <li class="svcp-feature">Elevations (up to 4 sides)</li>
+                  <li class="svcp-feature">2 revision rounds</li>
+                  <li class="svcp-feature">PDF delivery</li>
+                </ul>
+                <div class="svcp-note" id="svcp-note">Ideal for small residential projects</div>
+              </div>
+              <div class="svc-row" data-svc="draft">
+                <span class="svc-row-num">01</span>
+                <span class="svc-row-name">Draft</span>
+                <span class="svc-row-desc">Floor plans + elevations</span>
+                <a class="svc-row-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Draft%20Package">Request a Quote →</a>
+              </div>
+              <div class="svc-row" data-svc="studio">
+                <span class="svc-row-num">02</span>
+                <span class="svc-row-name">Studio</span>
+                <span class="svc-row-desc">Full drafting + 3D renders</span>
+                <a class="svc-row-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Studio%20Package">Request a Quote →</a>
+              </div>
+              <div class="svc-row" data-svc="fullset">
+                <span class="svc-row-num">03</span>
+                <span class="svc-row-name">Full Set</span>
+                <span class="svc-row-desc">Permit-ready drawings + CAD files</span>
+                <a class="svc-row-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Full%20Set%20Package">Request a Quote →</a>
+              </div>
             </div>
-            <div class="svc-card">
-              <div class="svc-tier">Tier 02</div>
-              <div class="svc-name">Studio</div>
-              <div class="svc-tagline">Full drafting set plus photorealistic 3D renderings — everything you need for client presentations.</div>
-              <hr class="svc-rule">
-              <ul class="svc-features">
-                <li class="svc-feature">Everything in Draft</li>
-                <li class="svc-feature">3D exterior or interior rendering (up to 3 views)</li>
-                <li class="svc-feature">Material &amp; finish callouts</li>
-                <li class="svc-feature">3 revision rounds</li>
-                <li class="svc-feature">High-res JPEG + PDF delivery</li>
-              </ul>
-              <div class="svc-note">Most popular for residential redesigns</div>
-              <a class="svc-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Studio%20Package">Request a Quote →</a>
-            </div>
-            <div class="svc-card">
-              <div class="svc-tier">Tier 03</div>
-              <div class="svc-name">Full Set</div>
-              <div class="svc-tagline">Complete permit-ready drawing package with full rendering suite for larger or complex projects.</div>
-              <hr class="svc-rule">
-              <ul class="svc-features">
-                <li class="svc-feature">Everything in Studio</li>
-                <li class="svc-feature">Site plan &amp; section drawings</li>
-                <li class="svc-feature">Full rendering suite (up to 6 views)</li>
-                <li class="svc-feature">Construction detail sheets</li>
-                <li class="svc-feature">Unlimited revisions within scope</li>
-                <li class="svc-feature">CAD source files included</li>
-              </ul>
-              <div class="svc-note">For commercial &amp; multi-unit projects</div>
-              <a class="svc-cta" href="mailto:inniesia@gmail.com?subject=Quote%20Request%20%E2%80%94%20Full%20Set%20Package">Request a Quote →</a>
-            </div>
+            <p class="svc-dark-footer">Not sure which package fits? <a href="mailto:inniesia@gmail.com?subject=Architecture%20Services%20Inquiry">Send me a note</a> and I'll help figure it out.</p>
           </div>
-          <p class="svc-bottom-note">Not sure which package fits your project? <a href="mailto:inniesia@gmail.com?subject=Architecture%20Services%20Inquiry" style="color:#1a5fa0;text-decoration:none;border-bottom:1px solid #1a5fa0">Send me a note</a> and I'll help figure it out — I'll send a custom quote within 48 hours.</p>
         </div>
       </div><!-- end shop-main -->
     </div>
@@ -909,6 +896,20 @@ function switchShopTab(tab){
   document.getElementById('shop-prints').style.display=tab==='prints'?'':'none';
   document.getElementById('shop-services').style.display=tab==='services'?'':'none';
 }
+const _svcData={
+  draft:{num:'01 — Draft',name:'Draft',features:['Floor plans (up to 2 levels)','Elevations (up to 4 sides)','2 revision rounds','PDF delivery'],note:'Ideal for small residential projects'},
+  studio:{num:'02 — Studio',name:'Studio',features:['Everything in Draft','3D rendering (up to 3 views)','Material & finish callouts','3 revision rounds','High-res JPEG + PDF delivery'],note:'Most popular for residential redesigns'},
+  fullset:{num:'03 — Full Set',name:'Full Set',features:['Everything in Studio','Site plan & section drawings','Full rendering suite (up to 6 views)','Construction detail sheets','Unlimited revisions within scope','CAD source files included'],note:'For commercial & multi-unit projects'}
+};
+document.querySelectorAll('.svc-row').forEach(function(row){
+  row.addEventListener('mouseenter',function(){
+    var d=_svcData[this.dataset.svc];
+    document.getElementById('svcp-num').textContent=d.num;
+    document.getElementById('svcp-name').textContent=d.name;
+    document.getElementById('svcp-features').innerHTML=d.features.map(function(f){return'<li class="svcp-feature">'+f+'</li>';}).join('');
+    document.getElementById('svcp-note').textContent=d.note;
+  });
+});
 function _showWork(){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   document.getElementById('page-home').classList.add('active');
